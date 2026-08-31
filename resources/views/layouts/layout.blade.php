@@ -26,6 +26,42 @@
     <meta name="twitter:description" content="@yield('meta_description', ($siteSettings['site_title'] ?? 'TechTV Network') . ' explores technology, productivity, business, entertainment and national development in Africa\'s digital economy.')">
     <meta name="twitter:image" content="@yield('og_image', asset('assets/images/default-share.jpg'))">
 
+    <!-- RSS & Feed Discovery for Google News & LLMs -->
+    <link rel="alternate" type="application/rss+xml" title="{{ $siteSettings['site_title'] ?? 'TechTV Network' }} RSS Feed" href="{{ url('/feed') }}">
+
+    <!-- Global Organization / NewsMediaOrganization Schema (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@@context": "https://schema.org",
+      "@type": "NewsMediaOrganization",
+      "name": "{{ $siteSettings['site_title'] ?? 'TechTV Network' }}",
+      "alternateName": ["TechTV", "TechTV Nigeria", "TechTV Africa"],
+      "url": "{{ url('/') }}",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "{{ isset($siteSettings['site_logo']) ? asset($siteSettings['site_logo']) : asset('assets/img/logo.jpg') }}",
+        "width": 600,
+        "height": 120
+      },
+      "sameAs": [
+        "https://www.youtube.com/@TechTVNetwork",
+        "https://twitter.com/techtv_network",
+        "https://facebook.com/techtvnetwork"
+      ],
+      "publishingPrinciples": "{{ url('/editorial-policy') }}",
+      "correctionsPolicy": "{{ url('/editorial-policy') }}",
+      "diversityPolicy": "{{ url('/about') }}",
+      "ethicsPolicy": "{{ url('/editorial-policy') }}",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "{{ $siteSettings['site_phone'] ?? '+234-800-TECHTV' }}",
+        "contactType": "editorial newsdesk",
+        "email": "{{ $siteSettings['site_email'] ?? 'news@techtv.com.ng' }}",
+        "areaServed": ["NG", "Africa", "Global"]
+      }
+    }
+    </script>
+
     <!-- Schema JSON-LD Structured Data -->
     @yield('schema_json')
 
@@ -729,18 +765,33 @@
                 </div>
             </div>
 
-            {{-- Column 3: Quick Links --}}
+            {{-- Column 3: Trust & Policies --}}
             <div class="footer-col">
-                <h4 class="footer-col-heading">Quick Links</h4>
+                <h4 class="footer-col-heading">Company & Policies</h4>
                 <div class="footer-recent-posts">
                     <a href="{{ url('/about') }}" class="footer-post-item" style="padding: 0.35rem 0;">
-                        <span class="footer-post-title">About Us</span>
+                        <span class="footer-post-title">About TechTV Network</span>
+                    </a>
+                    <a href="{{ url('/editorial-policy') }}" class="footer-post-item" style="padding: 0.35rem 0;">
+                        <span class="footer-post-title">Editorial & Fact-Checking</span>
+                    </a>
+                    <a href="{{ url('/privacy-policy') }}" class="footer-post-item" style="padding: 0.35rem 0;">
+                        <span class="footer-post-title">Privacy Policy</span>
+                    </a>
+                    <a href="{{ url('/terms-of-service') }}" class="footer-post-item" style="padding: 0.35rem 0;">
+                        <span class="footer-post-title">Terms of Service</span>
+                    </a>
+                    <a href="{{ url('/cookie-policy') }}" class="footer-post-item" style="padding: 0.35rem 0;">
+                        <span class="footer-post-title">Cookie Policy</span>
                     </a>
                     <a href="{{ url('/advertise') }}" class="footer-post-item" style="padding: 0.35rem 0;">
                         <span class="footer-post-title">Advertise With Us</span>
                     </a>
                     <a href="{{ url('/contact') }}" class="footer-post-item" style="padding: 0.35rem 0;">
                         <span class="footer-post-title">Contact Us</span>
+                    </a>
+                    <a href="{{ url('/sitemap.xml') }}" target="_blank" class="footer-post-item" style="padding: 0.35rem 0;">
+                        <span class="footer-post-title">XML Sitemap</span>
                     </a>
                 </div>
             </div>
@@ -764,9 +815,20 @@
         </div>
 
         {{-- Bottom bar --}}
-        <div class="footer-bottom" style="background: #0B193C;">
-            <div class="container footer-bottom-inner">
-                <p style="color: #94A3B8;">&copy; {{ date('Y') }} Techtv Network. All Rights Reserved.</p>
+        <div class="footer-bottom" style="background: #0B193C; border-top: 1px solid rgba(255,255,255,0.08); padding: 1.25rem 0;">
+            <div class="container footer-bottom-inner" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                <p style="color: #94A3B8; margin: 0; font-size: 0.85rem;">
+                    &copy; {{ date('Y') }} TechTV Network. All Rights Reserved. Africa’s Voice for Technology & Business Insight.
+                </p>
+                <div style="display: flex; gap: 1rem; font-size: 0.82rem; flex-wrap: wrap;">
+                    <a href="{{ url('/privacy-policy') }}" style="color: #94A3B8; text-decoration: none;">Privacy Policy</a>
+                    <span style="color: #475569;">•</span>
+                    <a href="{{ url('/terms-of-service') }}" style="color: #94A3B8; text-decoration: none;">Terms of Service</a>
+                    <span style="color: #475569;">•</span>
+                    <a href="{{ url('/cookie-policy') }}" style="color: #94A3B8; text-decoration: none;">Cookie Policy</a>
+                    <span style="color: #475569;">•</span>
+                    <a href="{{ url('/editorial-policy') }}" style="color: #94A3B8; text-decoration: none;">Editorial Standards</a>
+                </div>
             </div>
         </div>
 
@@ -775,6 +837,24 @@
             <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M18 15l-6-6-6 6"/></svg>
         </button>
     </footer>
+
+    <!-- Cookie Consent Banner (Google Consent Mode v2 & GDPR/NDPR) -->
+    <div id="cookie-consent-banner" style="display: none; position: fixed; bottom: 0; left: 0; right: 0; background: #0B193C; color: #ffffff; padding: 1.25rem 1.5rem; z-index: 99999; box-shadow: 0 -4px 20px rgba(0,0,0,0.3); border-top: 2px solid var(--accent, #e02020);">
+        <div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+            <div style="font-size: 0.88rem; line-height: 1.6; max-width: 800px; color: #cbd5e1;">
+                <span style="font-size: 1.1rem; margin-right: 0.35rem;">🍪</span>
+                <strong>We Value Your Privacy:</strong> We use cookies and Google AdSense technologies to personalize content, analyze site traffic, and deliver tailored advertising. Learn more in our <a href="{{ url('/privacy-policy') }}" style="color: #38bdf8; text-decoration: underline;">Privacy Policy</a> and <a href="{{ url('/cookie-policy') }}" style="color: #38bdf8; text-decoration: underline;">Cookie Policy</a>.
+            </div>
+            <div style="display: flex; gap: 0.75rem; align-items: center; flex-shrink: 0;">
+                <button type="button" onclick="acceptAllCookies()" style="background: var(--accent, #e02020); color: #ffffff; border: none; padding: 0.6rem 1.25rem; border-radius: 6px; font-weight: 700; font-size: 0.85rem; cursor: pointer; transition: 0.2s;">
+                    Accept All
+                </button>
+                <button type="button" onclick="acceptEssentialCookies()" style="background: transparent; color: #94a3b8; border: 1px solid #475569; padding: 0.6rem 1.1rem; border-radius: 6px; font-weight: 600; font-size: 0.85rem; cursor: pointer; transition: 0.2s;">
+                    Essential Only
+                </button>
+            </div>
+        </div>
+    </div>
 
     <!-- Subscribe Modal -->
     <div id="subscribe-modal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 9999; align-items: center; justify-content: center;">
@@ -1019,6 +1099,45 @@
             }
         });
     }
+
+    // Cookie Consent Management (GDPR/NDPR & Google Consent Mode v2)
+    (function() {
+        const consent = localStorage.getItem('techtv_cookie_consent');
+        const banner = document.getElementById('cookie-consent-banner');
+        if (!consent && banner) {
+            setTimeout(() => {
+                banner.style.display = 'block';
+            }, 1000);
+        }
+    })();
+
+    window.acceptAllCookies = function() {
+        localStorage.setItem('techtv_cookie_consent', 'all');
+        const banner = document.getElementById('cookie-consent-banner');
+        if (banner) banner.style.display = 'none';
+        if (window.gtag) {
+            gtag('consent', 'update', {
+                'ad_storage': 'granted',
+                'ad_user_data': 'granted',
+                'ad_personalization': 'granted',
+                'analytics_storage': 'granted'
+            });
+        }
+    };
+
+    window.acceptEssentialCookies = function() {
+        localStorage.setItem('techtv_cookie_consent', 'essential');
+        const banner = document.getElementById('cookie-consent-banner');
+        if (banner) banner.style.display = 'none';
+        if (window.gtag) {
+            gtag('consent', 'update', {
+                'ad_storage': 'denied',
+                'ad_user_data': 'denied',
+                'ad_personalization': 'denied',
+                'analytics_storage': 'denied'
+            });
+        }
+    };
     </script>
     @yield('scripts')
 </body>

@@ -314,4 +314,53 @@ class BlogController extends Controller
     {
         return view('pages.contact');
     }
+
+    public function privacyPolicy()
+    {
+        return view('pages.privacy-policy');
+    }
+
+    public function termsOfService()
+    {
+        return view('pages.terms-of-service');
+    }
+
+    public function cookiePolicy()
+    {
+        return view('pages.cookie-policy');
+    }
+
+    public function editorialPolicy()
+    {
+        return view('pages.editorial-policy');
+    }
+
+    /**
+     * Generate RSS 2.0 / Atom feed for Google News, syndication, and LLM search bots.
+     */
+    public function feed()
+    {
+        $posts = Post::with(['category', 'author', 'tags'])
+            ->where('status', 'publish')
+            ->orderBy('published_at', 'desc')
+            ->take(30)
+            ->get();
+
+        $content = view('feed', compact('posts'))->render();
+
+        return response($content, 200)
+            ->header('Content-Type', 'application/rss+xml; charset=utf-8');
+    }
+
+    /**
+     * Output Google AdSense ads.txt content.
+     */
+    public function adsTxt()
+    {
+        $siteSettings = \Illuminate\Support\Facades\DB::table('settings')->pluck('value', 'key')->all();
+        $adsTxtContent = $siteSettings['ads_txt'] ?? "google.com, pub-4523098321045981, DIRECT, f08c47fec0942fa0\n# TechTV Network AdSense Verification";
+
+        return response($adsTxtContent, 200)
+            ->header('Content-Type', 'text/plain; charset=utf-8');
+    }
 }

@@ -1,7 +1,35 @@
+# Robots.txt for TechTV Network (https://techtvnetwork.ng)
+
+# Default crawler access
 User-agent: *
 Disallow: /admin
 Disallow: /admin/*
 Disallow: /login
+Disallow: /forgot-password
+Disallow: /verify-otp
+Disallow: /reset-password
+Allow: /
 
-# Direct access to search sitemaps
+# Google AdSense Crawler Optimization
+User-agent: Mediapartners-Google
+Allow: /
+
+# AI & LLM Search Crawlers (Generative Engine Optimization)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# Dynamic Search Sitemaps & RSS News Feeds
+Sitemap: http://localhost/Techtv/public/sitemap.xml
 Sitemap: https://techtvnetwork.ng/sitemap.xml

@@ -8,6 +8,11 @@ Route::get('/', [BlogController::class, 'index']);
 Route::get('/about', [BlogController::class, 'about']);
 Route::get('/advertise', [BlogController::class, 'advertise']);
 Route::get('/contact', [BlogController::class, 'contact']);
+Route::get('/privacy-policy', [BlogController::class, 'privacyPolicy']);
+Route::get('/terms-of-service', [BlogController::class, 'termsOfService']);
+Route::get('/terms', [BlogController::class, 'termsOfService']);
+Route::get('/cookie-policy', [BlogController::class, 'cookiePolicy']);
+Route::get('/editorial-policy', [BlogController::class, 'editorialPolicy']);
 Route::get('/post/{slug}', [BlogController::class, 'show']);
 Route::get('/category/{slug}', [BlogController::class, 'category']);
 Route::get('/tag/{slug}', [BlogController::class, 'tag']);
@@ -15,6 +20,9 @@ Route::get('/search', [BlogController::class, 'search']);
 Route::post('/post/{slug}/comment', [BlogController::class, 'storeComment']);
 Route::post('/newsletter/subscribe', [BlogController::class, 'subscribeNewsletter']);
 Route::get('/sitemap.xml', [App\Http\Controllers\SitemapController::class, 'index']);
+Route::get('/feed', [BlogController::class, 'feed']);
+Route::get('/rss.xml', [BlogController::class, 'feed']);
+Route::get('/ads.txt', [BlogController::class, 'adsTxt']);
 
 // Admin Authentication Routes
 use App\Http\Controllers\AdminController;

@@ -10,29 +10,78 @@
 <script type="application/ld+json">
 {
   "@@context": "https://schema.org",
-  "@type": "NewsArticle",
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "{{ request()->url() }}"
-  },
-  "headline": "{{ $post->title }}",
-  "description": "{{ Str::limit(strip_tags($post->excerpt ?: $post->body), 160) }}",
-  "keywords": "{{ $post->tags->pluck('name')->implode(', ') }}",
-  "image": "{{ $post->featured_image_url }}",
-  "author": {
-    "@type": "Person",
-    "name": "{{ $post->author ? $post->author->name : 'TechTV Network' }}"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "{{ $siteSettings['site_title'] ?? 'TechTV Network' }}",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "{{ isset($siteSettings['site_logo']) ? asset($siteSettings['site_logo']) : asset('assets/img/logo.jpg') }}"
+  "@graph": [
+    {
+      "@type": "NewsArticle",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "{{ request()->url() }}"
+      },
+      "headline": "{{ addslashes($post->title) }}",
+      "description": "{{ addslashes(Str::limit(strip_tags($post->excerpt ?: $post->body), 160)) }}",
+      "keywords": "{{ addslashes($post->tags->pluck('name')->implode(', ')) }}",
+      "articleSection": "{{ $post->category ? addslashes($post->category->name) : 'Technology' }}",
+      "inLanguage": "en-NG",
+      "wordCount": {{ str_word_count(strip_tags($post->body)) }},
+      "image": [
+        "{{ $post->featured_image_url }}"
+      ],
+      "author": {
+        "@type": "Person",
+        "name": "{{ $post->author ? addslashes($post->author->name) : 'TechTV Editorial Team' }}",
+        "jobTitle": "Technology Journalist",
+        "worksFor": {
+          "@type": "Organization",
+          "name": "{{ $siteSettings['site_title'] ?? 'TechTV Network' }}"
+        }
+      },
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "{{ $siteSettings['site_title'] ?? 'TechTV Network' }}",
+        "url": "{{ url('/') }}",
+        "publishingPrinciples": "{{ url('/editorial-policy') }}",
+        "correctionsPolicy": "{{ url('/editorial-policy') }}",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "{{ isset($siteSettings['site_logo']) ? asset($siteSettings['site_logo']) : asset('assets/img/logo.jpg') }}"
+        }
+      },
+      "datePublished": "{{ $post->published_at ? $post->published_at->toIso8601String() : $post->created_at->toIso8601String() }}",
+      "dateModified": "{{ $post->updated_at ? $post->updated_at->toIso8601String() : $post->created_at->toIso8601String() }}"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "{{ url('/') }}"
+        }
+        @if($post->category)
+        ,{
+          "@type": "ListItem",
+          "position": 2,
+          "name": "{{ addslashes($post->category->name) }}",
+          "item": "{{ url('/category/' . $post->category->slug) }}"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "{{ addslashes($post->title) }}",
+          "item": "{{ request()->url() }}"
+        }
+        @else
+        ,{
+          "@type": "ListItem",
+          "position": 2,
+          "name": "{{ addslashes($post->title) }}",
+          "item": "{{ request()->url() }}"
+        }
+        @endif
+      ]
     }
-  },
-  "datePublished": "{{ $post->published_at ? $post->published_at->toIso8601String() : $post->created_at->toIso8601String() }}",
-  "dateModified": "{{ $post->updated_at ? $post->updated_at->toIso8601String() : $post->created_at->toIso8601String() }}"
+  ]
 }
 </script>
 @endsection
