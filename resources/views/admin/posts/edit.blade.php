@@ -7,27 +7,48 @@
 <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
 <style>
 .ck-editor__editable_inline {
-    min-height: 250px;
+    min-height: 280px;
 }
 </style>
 <script>
+  let editorInstance = null;
   document.addEventListener("DOMContentLoaded", function() {
       ClassicEditor
-          .create( document.querySelector( '#body' ) )
+          .create( document.querySelector( '#body' ), {
+              toolbar: ['heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote', 'insertTable', 'undo', 'redo']
+          })
+          .then( editor => {
+              editorInstance = editor;
+              editor.model.document.on('change:data', () => {
+                  document.querySelector('#body').value = editor.getData();
+              });
+          })
           .catch( error => {
               console.error( error );
-          } );
+          });
   });
 </script>
 
 <div style="background-color: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 2.5rem; box-shadow: var(--shadow-soft); max-width: 900px; margin: 0 auto;">
-    <form action="{{ url('/admin/posts/' . $post->id) }}" method="POST" enctype="multipart/form-data" style="display: flex; flex-direction: column; gap: 1.5rem;">
+
+    @if($errors->any())
+        <div style="background: #fee2e2; border: 1px solid #fca5a5; color: #991b1b; padding: 1rem 1.25rem; border-radius: var(--radius-md); margin-bottom: 1.5rem; font-size: 0.9rem;">
+            <strong style="display: block; margin-bottom: 0.35rem;">⚠️ Please fix the following errors:</strong>
+            <ul style="margin: 0; padding-left: 1.25rem;">
+                @foreach($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+    <form id="postForm" action="{{ url('/admin/posts/' . $post->id) }}" method="POST" enctype="multipart/form-data" style="display: flex; flex-direction: column; gap: 1.5rem;">
         @csrf
         @method('PUT')
         
         <!-- Title -->
         <div class="form-group">
-            <label class="form-label" for="title">Post Title</label>
+            <label class="form-label" for="title">Post Title <span style="color: var(--accent, #e02020);">*</span></label>
             <input class="input-field" type="text" id="title" name="title" value="{{ old('title', $post->title) }}" required>
         </div>
 
@@ -39,8 +60,8 @@
 
         <!-- Body Content -->
         <div class="form-group">
-            <label class="form-label" for="body">Content Body</label>
-            <textarea class="input-field" id="body" name="body" rows="12" required>{{ old('body', $post->body) }}</textarea>
+            <label class="form-label" for="body">Content Body <span style="color: var(--accent, #e02020);">*</span></label>
+            <textarea class="input-field" id="body" name="body" rows="12">{{ old('body', $post->body) }}</textarea>
         </div>
 
         <!-- Two Column Grid for Metadata -->
@@ -51,7 +72,7 @@
                 <select class="input-field" id="category_id" name="category_id">
                     <option value="">Select Category</option>
                     @foreach($categories as $cat)
-                        <option value="{{ $cat->id }}" {{ $post->category_id == $cat->id ? 'selected' : '' }}>{{ $cat->name }}</option>
+                        <option value="{{ $cat->id }}" {{ old('category_id', $post->category_id) == $cat->id ? 'selected' : '' }}>{{ $cat->name }}</option>
                     @endforeach
                 </select>
             </div>
@@ -60,8 +81,8 @@
             <div class="form-group">
                 <label class="form-label" for="status">Status</label>
                 <select class="input-field" id="status" name="status" required>
-                    <option value="draft" {{ $post->status === 'draft' ? 'selected' : '' }}>Draft</option>
-                    <option value="publish" {{ $post->status === 'publish' ? 'selected' : '' }}>Publish</option>
+                    <option value="draft" {{ old('status', $post->status) === 'draft' ? 'selected' : '' }}>Draft</option>
+                    <option value="publish" {{ old('status', $post->status) === 'publish' ? 'selected' : '' }}>Publish</option>
                 </select>
             </div>
             
@@ -71,7 +92,7 @@
                 <label class="form-label" for="author_id">Author (Super Admin)</label>
                 <select class="input-field" id="author_id" name="author_id">
                     @foreach($authors as $authorUser)
-                        <option value="{{ $authorUser->id }}" {{ $post->author_id == $authorUser->id ? 'selected' : '' }}>{{ $authorUser->name }}</option>
+                        <option value="{{ $authorUser->id }}" {{ old('author_id', $post->author_id) == $authorUser->id ? 'selected' : '' }}>{{ $authorUser->name }}</option>
                     @endforeach
                 </select>
             </div>
@@ -80,7 +101,7 @@
             <!-- Publish Date -->
             <div class="form-group">
                 <label class="form-label" for="published_at">Publish Date (Schedule/Backdate)</label>
-                <input type="datetime-local" class="input-field" id="published_at" name="published_at" value="{{ $post->published_at ? $post->published_at->format('Y-m-d\TH:i') : '' }}">
+                <input type="datetime-local" class="input-field" id="published_at" name="published_at" value="{{ old('published_at', $post->published_at ? $post->published_at->format('Y-m-d\TH:i') : '') }}">
             </div>
         </div>
 
@@ -96,16 +117,7 @@
                 <span style="font-size: 0.9rem; color: var(--text-muted);">OR</span>
                 <button type="button" class="btn-action" onclick="openMediaModal()">Select from Media</button>
             </div>
-            <input type="hidden" id="featured_image_path" name="featured_image_path" value="">
-        </div>
-
-        <!-- YouTube Video URL (Optional) -->
-        <div class="form-group">
-            <label class="form-label" for="video_url">YouTube Video URL (Optional — For TechTV Video Section)</label>
-            <input type="url" class="input-field" id="video_url" name="video_url" value="{{ old('video_url', $post->video_url) }}" placeholder="https://www.youtube.com/watch?v=... or https://youtu.be/...">
-            <small style="color: var(--text-muted); font-size: 0.8rem; display: block; margin-top: 0.35rem;">
-                When users click this video post in the TechTV YouTube section, they will be taken directly to this video on YouTube.
-            </small>
+            <input type="hidden" id="featured_image_path" name="featured_image_path" value="{{ old('featured_image_path', '') }}">
         </div>
 
         <!-- Tags / SEO Keywords (Max 5) -->
@@ -386,6 +398,23 @@ document.addEventListener('DOMContentLoaded', function() {
         input.addEventListener('blur', function() {
             if (this.value.trim() && currentTags.length < 5) {
                 addTag(this.value);
+            }
+        });
+    }
+
+    // Form submission validation & CKEditor sync
+    const postForm = document.getElementById('postForm');
+    if (postForm) {
+        postForm.addEventListener('submit', function(e) {
+            if (editorInstance) {
+                const editorData = editorInstance.getData();
+                document.getElementById('body').value = editorData;
+                if (!editorData.trim() || editorData === '<p>&nbsp;</p>') {
+                    e.preventDefault();
+                    alert('Please enter content for the post body.');
+                    editorInstance.editing.view.focus();
+                    return false;
+                }
             }
         });
     }

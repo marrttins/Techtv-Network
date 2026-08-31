@@ -110,10 +110,14 @@ class AdminPostController extends Controller
         }
         $validated['slug'] = $slug;
         
-        if (Auth::user()->role === 'super-admin' && !empty($validated['author_id'])) {
-            // keep the author_id from form
+        if (Auth::check() && Auth::user()->role === 'super-admin' && !empty($validated['author_id'])) {
+            // keep author_id
         } else {
             $validated['author_id'] = Auth::id() ?: 1;
+        }
+
+        if (empty($validated['category_id'])) {
+            $validated['category_id'] = null;
         }
 
         if (empty($validated['published_at']) && $validated['status'] === 'publish') {
