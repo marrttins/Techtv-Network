@@ -1,0 +1,448 @@
+
+.dark-mode-switcher .switcher-wrap {
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    font-size: 18px;
+}
+
+.dark-mode-switcher .switcher-wrap span {
+    transition: 0.3s cubic-bezier(0.01, 0.68, 0.42, 1.36) !important;
+    transform: scale(1);
+}
+
+.dark-mode-switcher .dark-icon {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.dark-mode-switcher i {
+    line-height: 1;
+    display: block;
+}
+
+html[scheme="dark"] .dark-mode-switcher .light-icon {
+    transform: scale(0);
+}
+
+html[scheme="light"] .dark-mode-switcher .dark-icon {
+    transform: scale(0);
+}
+
+
+
+
+
+
+html[scheme="dark"] {
+    --body-color: #e3e7ed;
+    --body-bg-color: #262b31;
+    --headings-color: #fff;
+    --soft-white: #ffffff0f;
+    --soft-black: #0000000f;
+    --soft-black-2: #3f454c47;
+    --shadow-soft: 0 6px 10px -2px #25262b42;
+    --card-bg: #1d2126;
+}
+
+html[scheme="dark"] mark,
+html[scheme="dark"] ins {
+    background-color: #fff9c0;
+}
+
+html[scheme="dark"] blockquote {
+    border-color: #fff;
+}
+
+html[scheme="dark"] .wp-block-quote:not(.is-style-plain) {
+    background: var(--soft-white);
+}
+
+html[scheme="dark"] select,
+html[scheme="dark"] textarea,
+html[scheme="dark"] input[type="text"],
+html[scheme="dark"] input[type="password"],
+html[scheme="dark"] input[type="datetime"],
+html[scheme="dark"] input[type="datetime-local"],
+html[scheme="dark"] input[type="date"],
+html[scheme="dark"] input[type="month"],
+html[scheme="dark"] input[type="time"],
+html[scheme="dark"] input[type="week"],
+html[scheme="dark"] input[type="number"],
+html[scheme="dark"] input[type="email"],
+html[scheme="dark"] input[type="url"],
+html[scheme="dark"] input[type="search"],
+html[scheme="dark"] input[type="tel"],
+html[scheme="dark"] input[type="color"] {
+    background-color: #515b6957;
+    border-color: #515b6957;
+}
+
+html[scheme="dark"] select:focus,
+html[scheme="dark"] textarea:focus,
+html[scheme="dark"] input[type="text"]:focus,
+html[scheme="dark"] input[type="password"]:focus,
+html[scheme="dark"] input[type="datetime"]:focus,
+html[scheme="dark"] input[type="datetime-local"]:focus,
+html[scheme="dark"] input[type="date"]:focus,
+html[scheme="dark"] input[type="month"]:focus,
+html[scheme="dark"] input[type="time"]:focus,
+html[scheme="dark"] input[type="week"]:focus,
+html[scheme="dark"] input[type="number"]:focus,
+html[scheme="dark"] input[type="email"]:focus,
+html[scheme="dark"] input[type="url"]:focus,
+html[scheme="dark"] input[type="search"]:focus,
+html[scheme="dark"] input[type="tel"]:focus,
+html[scheme="dark"] input[type="color"]:focus {
+    border-color: #ffffff2e;
+}
+
+html[scheme="dark"] ::placeholder {
+    color: #ffffff40 !important;
+}
+
+html[scheme="dark"] :-ms-input-placeholder {
+    color: #ffffff40 !important;
+}
+
+html[scheme="dark"] ::-ms-input-placeholder {
+    color: #ffffff40 !important;
+}
+
+html[scheme="dark"] #back-to-top:hover {
+    box-shadow: none;
+}
+
+html[scheme="dark"] .blog-archive-title {
+    border-color:var(--soft-white);
+    background: var(--body-bg-color);
+    color: var(--body-color);
+}
+
+html[scheme="dark"] .blog-archive-title .title {
+    color: var(--headings-color);
+}
+
+html[scheme="dark"] .blog-archive-title .post-count span {
+    background: var(--soft-white);
+}
+
+html[scheme="dark"] .default-post-list-pagination .page-numbers {
+    color: #fff;
+}
+
+html[scheme="dark"] .rivax-breadcrumb {
+    color: #8e9296;
+}
+
+html[scheme="dark"] .single-hero-meta {
+    color: #a2a3a9;
+}
+
+html[scheme="dark"] .page-content-wrapper .post-nav-links .post-page-numbers {
+    background: #000;
+}
+
+html[scheme="dark"] .page-content-wrapper .post-nav-links .post-page-numbers:hover, html[scheme="dark"] .page-content-wrapper .post-nav-links .post-page-numbers.current {
+    background: var(--accent-color);
+}
+
+html[scheme="dark"] .single-post-tags a {
+    border-color: #ffffff54;
+    color: #fff;
+}
+
+html[scheme="dark"] .single-post-tags a:hover {
+    border-color: #fff;
+}
+
+html[scheme="dark"] .author-social-links a {
+    color: #fff;
+}
+
+html[scheme="dark"] .author-social-links a:hover {
+    color: var(--accent-color);
+}
+
+html[scheme="dark"] .single-share-box-link .share-link-text {
+    color: #fff;
+}
+
+html[scheme="dark"] .rivax-toc-wrap {
+    background: var(--soft-black-2);
+}
+
+html[scheme="dark"] .popup-search .popup-search-container {
+    background: var(--body-bg-color);
+}
+
+html[scheme="dark"] .popup-search-close {
+    color: #fff;
+}
+
+html[scheme="dark"] .popup-search-form-wrap h5 {
+    color: #fff;
+}
+
+html[scheme="dark"] .popup-search-form .search-field::-webkit-input-placeholder, html[scheme="dark"] .popup-search-form .search-field::placeholder {
+    color:  #ffffff40;
+}
+
+html[scheme="dark"] .popup-search-form .submit {
+    color: #fff;
+}
+
+html[scheme="dark"] .inline-search-form .search-field::-webkit-input-placeholder, html[scheme="dark"] .inline-search-form .search-field::placeholder {
+    color:  #ffffff40 !important;
+}
+
+html[scheme="dark"] .rivax-header-nav li.menu-item > a {
+    color: #fff;
+}
+
+html[scheme="dark"] .rivax-header-nav .sub-menu li.menu-item > a  {
+    color: #fff;
+}
+
+html[scheme="dark"] .rivax-header-nav .sub-menu {
+    background: var(--card-bg);
+    box-shadow: none;
+}
+
+html[scheme="dark"] .rivax-header-v-nav li a {
+    color: #ffffff;
+}
+
+html[scheme="dark"] .sticky-header-default {
+    background: var(--body-bg-color);
+    box-shadow: none;
+}
+
+html[scheme="dark"] .offcanvas-wrapper .offcanvas-container {
+    background: var(--body-bg-color) !important;
+}
+
+html[scheme="dark"] .offcanvas-close {
+    color: #fff !important;
+}
+
+html[scheme="dark"] .rivax-logo-image.dark-logo + .rivax-logo-image{
+    display: none;
+}
+
+html[scheme="dark"] .rivax-logo-image.dark-logo {
+    display: inline;
+}
+
+html[scheme="dark"] .rivax-logo-title a {
+    color: var(--headings-color);
+}
+
+html[scheme="dark"] .rivax-logo-title a:hover {
+    color: var(--accent-color);
+}
+
+html[scheme="dark"] .rivax-logo-description {
+    color: var(--headings-color) !important;
+}
+
+html[scheme="dark"] .rivax-advanced-heading-wrap:before {
+    color: #ffffff1f;
+}
+
+html[scheme="dark"] .rivax-divider-heading {
+    --divider-color-2: #ffffff40;
+}
+
+html[scheme="dark"] .rivax-social-icons .social-item {
+    border-color: var(--soft-white);
+}
+
+html[scheme="dark"] .post-wrapper .terms-wrapper.multi-underline .term-item {
+    color: #fff;
+}
+
+html[scheme="dark"] .post-wrapper .terms-wrapper.multi-underline-2 .term-item {
+    color: #fff;
+}
+
+html[scheme="dark"] .post-wrapper .terms-wrapper.multi-underline-3 .term-item {
+    color: #fff;
+}
+
+html[scheme="dark"] .post-wrapper .terms-wrapper.multi-underline-4 .term-item {
+    color: #fff;
+}
+
+html[scheme="dark"] .post-wrapper .terms-wrapper.multi-underline-5 .term-item {
+    color: #fff;
+}
+
+html[scheme="dark"] .post-wrapper .terms-wrapper.multi-underline-6 .term-item {
+    color: #fff;
+}
+
+html[scheme="dark"] .flank-slider .post-wrapper {
+    background: var(--soft-white);
+}
+
+html[scheme="dark"] .rivax-insta-info .username,
+html[scheme="dark"] .rivax-insta-info .tagline {
+    color: var(--body-color) !important;
+}
+
+html[scheme="dark"] .rivax-mailchimp-input-label {
+    color: var(--body-color) !important;
+}
+
+html[scheme="dark"] .rivax-mailchimp-input input {
+    color: #fff !important;
+}
+
+html[scheme="dark"] .rivax-advanced-button.style-10 {
+    --button-bg: #1b1c1d;
+    --bg-02: #ffffff;
+    border-color: transparent !important;
+}
+
+/* Elementor Default Widgets */
+
+html[scheme="dark"] .elementor-widget-heading .elementor-heading-title {
+    -webkit-text-stroke-color: var(--body-color) !important;
+    stroke: var(--body-color) !important;
+}
+
+html[scheme="dark"] .elementor-drop-cap-view-framed .elementor-drop-cap, html[scheme="dark"] .elementor-drop-cap-view-default .elementor-drop-cap {
+    color: var(--accent-color) !important;
+    border-color: var(--accent-color) !important;
+}
+
+html[scheme="dark"] .elementor-image-box-title {
+    -webkit-text-stroke-color: var(--body-color) !important;
+    stroke: var(--body-color) !important;
+}
+
+html[scheme="dark"] .elementor-image-box-img img {
+    border-color: var(--soft-white) !important;
+}
+
+html[scheme="dark"] .elementor-icon-box-title {
+    -webkit-text-stroke-color: var(--body-color) !important;
+    stroke: var(--body-color) !important;
+}
+
+html[scheme="dark"] .elementor-star-rating__title {
+    color: var(--body-color) !important;
+}
+
+html[scheme="dark"] .elementor-widget-progress .elementor-title {
+    color: var(--body-color) !important;
+}
+
+html[scheme="dark"] .elementor-widget-progress .elementor-progress-wrapper {
+    background-color: var(--soft-white) !important;
+}
+
+html[scheme="dark"] .elementor-widget-testimonial .elementor-testimonial-content {
+    color: var(--body-color) !important;
+}
+
+html[scheme="dark"] .elementor-widget-testimonial .elementor-testimonial-name {
+    color: #fff !important;
+}
+
+html[scheme="dark"] .elementor-widget-testimonial .elementor-testimonial-job {
+    color: var(--accent-color) !important;
+}
+
+html[scheme="dark"] .elementor-widget-tabs .elementor-tab-content {
+    color: #fff !important;
+}
+
+html[scheme="dark"] .elementor-widget-tabs .elementor-tabs-content-wrapper,
+html[scheme="dark"] .elementor-widget-tabs .elementor-tab-desktop-title.elementor-active {
+    background-color: transparent !important;
+}
+
+html[scheme="dark"] .elementor-widget-tabs .elementor-tab-title, html[scheme="dark"] .elementor-widget-tabs .elementor-tab-title a {
+    color: #fff !important;
+}
+
+html[scheme="dark"] .elementor-widget-tabs .elementor-tab-title.elementor-active, html[scheme="dark"] .elementor-widget-tabs .elementor-tab-title.elementor-active a {
+    color: #fff !important;
+}
+
+html[scheme="dark"] .elementor-widget-accordion .elementor-tab-content {
+    background-color: transparent !important;
+    color: var(--body-color) !important;
+}
+
+html[scheme="dark"] .elementor-widget-accordion .elementor-tab-title {
+    background-color: transparent !important;
+}
+
+html[scheme="dark"] .elementor-widget-accordion .elementor-accordion-icon, html[scheme="dark"] .elementor-widget-accordion .elementor-accordion-title {
+    color: #fff !important;
+	fill: #fff;
+}
+
+html[scheme="dark"] .elementor-widget-accordion .elementor-tab-title .elementor-accordion-icon i:before {
+    color: #fff !important;
+}
+
+html[scheme="dark"] .elementor-widget-accordion .elementor-tab-title.elementor-active .elementor-accordion-icon i:before {
+    color: #fff !important;
+}
+
+html[scheme="dark"] .elementor-accordion .elementor-tab-title .elementor-accordion-icon svg {
+    fill: currentColor !important;
+}
+
+html[scheme="dark"] .elementor-widget-toggle .elementor-tab-content {
+    background-color: transparent !important;
+    color: var(--body-color) !important;
+}
+
+html[scheme="dark"] .elementor-widget-toggle .elementor-tab-title {
+    background-color: transparent !important;
+}
+
+html[scheme="dark"] .elementor-widget-toggle .elementor-toggle-icon, html[scheme="dark"] .elementor-widget-toggle .elementor-toggle-title {
+    color: #fff !important;
+}
+
+html[scheme="dark"] .elementor-widget-toggle .elementor-tab-title .elementor-toggle-icon i:before {
+    color: #fff !important;
+}
+
+html[scheme="dark"] .elementor-toggle-icon svg {
+	fill: currentColor !important;
+}
+
+
+/* Woocommerce */
+
+html[scheme="dark"] .woocommerce {
+    --wc-form-color-background: #515b6957;
+    --wc-form-border-color: #515b6957;
+    --wc-form-color-text: #fff;
+}
+
+html[scheme="dark"] .woocommerce form .show-password-input::before, html[scheme="dark"] .woocommerce-page form .show-password-input::before {
+    filter: invert(1);
+}
+
+html[scheme="dark"] .wc-block-components-form .wc-block-components-text-input input,
+html[scheme="dark"] .wc-block-components-text-input input {
+    background-color: #515b6957;
+    border-color: #515b6957;
+    color: #fff;
+}
+
+html[scheme="dark"] .wc-block-components-form .wc-block-components-text-input input:focus,
+html[scheme="dark"] .wc-block-components-text-input input:focus {
+    background-color: #515b6957;
+    border-color: #ffffff2e;
+    color: #fff;
+}

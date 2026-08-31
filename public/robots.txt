@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /admin
+Disallow: /admin/*
+Disallow: /login
+
+# Direct access to search sitemaps
+Sitemap: https://techtvnetwork.ng/sitemap.xml

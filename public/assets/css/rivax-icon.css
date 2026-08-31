@@ -1,0 +1,175 @@
+@charset "UTF-8";
+
+@font-face {
+  font-family: "rivax-icon";
+  src:url("../fonts/rivax-icon.eot");
+  src:url("../fonts/rivax-icon.eot?#iefix") format("embedded-opentype"),
+    url("../fonts/rivax-icon.woff") format("woff"),
+    url("../fonts/rivax-icon.ttf") format("truetype"),
+    url("../fonts/rivax-icon.svg#rivax-icon") format("svg");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+[class^="ri-"],
+[class*=" ri-"] {
+  display: inline-block;
+}
+
+[class^="ri-"]:before,
+[class*=" ri-"]:before {
+  font-family: "rivax-icon" !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  display: block;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+.ri-right-arrow-1:before {
+  content: "\e906";
+}
+.ri-right-arrow-2:before {
+  content: "\e907";
+}
+.ri-right-arrow-3:before {
+  content: "\e909";
+}
+.ri-right-arrow-4:before {
+  content: "\e90c";
+}
+.ri-right-arrow-5:before {
+  content: "\e90e";
+}
+.ri-right-arrow-6:before {
+  content: "\e90f";
+}
+.ri-right-arrow-7:before {
+  content: "\e919";
+}
+.ri-right-arrow-8:before {
+  content: "\e925";
+}
+.ri-right-arrow-9:before {
+  content: "\e926";
+}
+.ri-right-arrow-10:before {
+  content: "\e929";
+}
+.ri-right-arrow-11:before {
+  content: "\e92e";
+}
+.ri-right-arrow-12:before {
+  content: "\e92f";
+}
+.ri-right-arrow-13:before {
+  content: "\e931";
+}
+.ri-right-arrow-14:before {
+  content: "\e933";
+}
+.ri-right-arrow-15:before {
+  content: "\e935";
+}
+.ri-vimeo:before {
+  content: "\e90a";
+}
+.ri-behance:before {
+  content: "\e910";
+}
+.ri-pinterest:before {
+  content: "\e911";
+}
+.ri-stack-overflow:before {
+  content: "\e913";
+}
+.ri-earth:before {
+  content: "\e915";
+}
+.ri-soundcloud:before {
+  content: "\e916";
+}
+.ri-email:before {
+  content: "\e918";
+}
+.ri-telegram:before {
+  content: "\e91a";
+}
+.ri-linkedin:before {
+  content: "\e91b";
+}
+.ri-twitter:before {
+  content: "\e91c";
+}
+.ri-facebook:before {
+  content: "\e91d";
+}
+.ri-tumblr:before {
+  content: "\e91e";
+}
+.ri-youtube:before {
+  content: "\e91f";
+}
+.ri-instagram:before {
+  content: "\e920";
+}
+.ri-github:before {
+  content: "\e921";
+}
+.ri-dribbble:before {
+  content: "\e922";
+}
+.ri-whatsapp:before {
+  content: "\e923";
+}
+.ri-pin:before {
+  content: "\e908";
+}
+.ri-user:before {
+  content: "\e900";
+}
+.ri-calendar:before {
+  content: "\e901";
+}
+.ri-fire:before {
+  content: "\e904";
+}
+.ri-clock:before {
+  content: "\e92a";
+}
+.ri-chat:before {
+  content: "\e928";
+}
+.ri-mic:before {
+  content: "\e932";
+}
+.ri-video:before {
+  content: "\e90b";
+}
+.ri-link:before {
+  content: "\e930";
+}
+.ri-gallery:before {
+  content: "\e92c";
+}
+.ri-copy:before {
+  content: "\e927";
+}
+.ri-quote:before {
+  content: "\e902";
+}
+.ri-search:before {
+  content: "\e903";
+}
+.ri-sun:before {
+  content: "\e905";
+}
+.ri-moon:before {
+  content: "\e912";
+}

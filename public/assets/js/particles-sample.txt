@@ -1,0 +1,289 @@
+/****Sample 1: Multi color circles
+********************************
+
+{
+"particles": {
+"number": {
+  "value": 40,
+  "density": {
+	"enable": true,
+	"value_area": 800
+  }
+},
+"color": {
+  "value": ["#48bb0f","#fd5c4c","#0fbbb4","#4c7cfd","#ff3f80"]
+},
+"shape": {
+  "type": "circle"
+},
+"size": {
+  "value": 5,
+  "random": true,
+  "anim": {
+	"enable": true,
+	"speed": 1
+  }
+},
+"opacity": {
+  "value": 1,
+  "random": false
+},
+"line_linked": {
+  "enable": false
+},
+"move": {
+  "direction": "none",
+  "attract": {
+	"enable": true
+  }
+}
+},
+"interactivity": {
+"detect_on": "canvas",
+"events": {
+  "onhover": {
+	"enable": false
+  },
+  "onclick": {
+	"enable": false
+  }
+}
+},
+"retina_detect": true
+}
+
+
+
+
+
+
+/****Sample 2: Multi color circles to top
+********************************
+
+{
+"particles": {
+"number": {
+  "value": 40,
+  "density": {
+	"enable": true,
+	"value_area": 800
+  }
+},
+"color": {
+  "value": ["#48bb0f","#fd5c4c","#0fbbb4","#4c7cfd","#ff3f80"]
+},
+"shape": {
+  "type": "circle"
+},
+"size": {
+  "value": 5,
+  "random": true,
+  "anim": {
+	"enable": true,
+	"speed": 1
+  }
+},
+"opacity": {
+  "value": 1,
+  "random": false
+},
+"line_linked": {
+  "enable": false
+},
+"move": {
+  "direction": "top",
+  "attract": {
+	"enable": true
+  }
+}
+},
+"interactivity": {
+"detect_on": "canvas",
+"events": {
+  "onhover": {
+	"enable": false
+  },
+  "onclick": {
+	"enable": false
+  }
+}
+},
+"retina_detect": true
+}
+
+
+
+
+/****Sample 3: Multi color circles with links
+********************************
+
+{
+"particles": {
+"number": {
+  "value": 40,
+  "density": {
+	"enable": true,
+	"value_area": 800
+  }
+},
+"color": {
+  "value": ["#48bb0f","#fd5c4c","#0fbbb4","#4c7cfd","#ff3f80"]
+},
+"shape": {
+  "type": "circle"
+},
+"size": {
+  "value": 5,
+  "random": true,
+  "anim": {
+	"enable": true,
+	"speed": 1
+  }
+},
+"opacity": {
+  "value": 1,
+  "random": false
+},
+"line_linked": {
+  "enable": true,
+  "distance": 150,
+  "color": "#c2c6dd",
+  "opacity": 0.4,
+  "width": 1
+},
+"move": {
+  "direction": "none",
+  "attract": {
+	"enable": true
+  }
+}
+},
+"interactivity": {
+"detect_on": "canvas",
+"events": {
+  "onhover": {
+	"enable": false
+  },
+  "onclick": {
+	"enable": false
+  }
+}
+},
+"retina_detect": true
+}
+
+
+
+
+/****Sample 4: Multi color triangle to right
+********************************
+
+{
+"particles": {
+"number": {
+  "value": 40,
+  "density": {
+	"enable": true,
+	"value_area": 800
+  }
+},
+"color": {
+  "value": ["#b4dda0","#ffa49b","#75e4df","#92aef9","#f5a0bd"]
+},
+"shape": {
+  "type": "triangle"
+},
+"size": {
+  "value": 20,
+  "random": true,
+  "anim": {
+	"enable": true,
+	"speed": 1
+  }
+},
+"opacity": {
+  "value": 1,
+  "random": false
+},
+"line_linked": {
+  "enable": false
+},
+"move": {
+  "direction": "right",
+  "attract": {
+	"enable": true
+  }
+}
+},
+"interactivity": {
+"detect_on": "canvas",
+"events": {
+  "onhover": {
+	"enable": false
+  },
+  "onclick": {
+	"enable": false
+  }
+}
+},
+"retina_detect": true
+}
+
+
+
+
+
+/****Sample 5: Multi color edge to top
+********************************
+
+{
+"particles": {
+"number": {
+  "value": 40,
+  "density": {
+	"enable": true,
+	"value_area": 800
+  }
+},
+"color": {
+  "value": ["#b4dda0","#ffa49b","#75e4df","#92aef9","#f5a0bd"]
+},
+"shape": {
+  "type": "edge"
+},
+"size": {
+  "value": 30,
+  "random": true,
+  "anim": {
+	"enable": true,
+	"speed": 1
+  }
+},
+"opacity": {
+  "value": 0.3,
+  "random": false
+},
+"line_linked": {
+  "enable": false
+},
+"move": {
+  "direction": "top",
+"speed": 3,
+  "attract": {
+	"enable": true
+  }
+}
+},
+"interactivity": {
+"detect_on": "canvas",
+"events": {
+  "onhover": {
+	"enable": false
+  },
+  "onclick": {
+	"enable": false
+  }
+}
+},
+"retina_detect": true
+}

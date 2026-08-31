@@ -1,0 +1,57 @@
+# Environment and Credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+auth.json
+
+# Scratch & Tests requested by user
+/scratch
+/scratch/
+/tests
+/tests/
+
+# Sensitive & Local Database Dumps
+*.sql
+*.sqlite
+database/*.sqlite
+
+# Logs and Framework Caches
+*.log
+/storage/logs/*
+!storage/logs/.gitignore
+/storage/framework/cache/*
+!storage/framework/cache/.gitignore
+/storage/framework/sessions/*
+!storage/framework/sessions/.gitignore
+/storage/framework/views/*
+!storage/framework/views/.gitignore
+/storage/pail
+/storage/*.key
+
+# Dependencies
+/vendor
+/node_modules
+
+# Build assets
+/public/build
+/public/hot
+/public/storage
+
+# IDE & OS files
+.DS_Store
+Thumbs.db
+/.idea
+/.vscode
+/.cursor/
+/.zed
+/.nova
+/.codex
+/.agents
+.phpactor.json
+.phpunit.result.cache
+/.phpunit.cache
+_ide_helper.php
+Homestead.json
+Homestead.yaml
