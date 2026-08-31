@@ -121,25 +121,25 @@
 <div class="sp-wrap container" style="padding-bottom: 4rem;">
 
     {{-- Breadcrumb Navigation --}}
-    <nav class="sp-breadcrumb" aria-label="Breadcrumb" style="margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; color: #64748b;">
-        <a href="{{ url('/') }}" style="color: inherit; text-decoration: none;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='inherit'">Home</a>
+    <nav class="sp-breadcrumb" aria-label="Breadcrumb">
+        <a href="{{ url('/') }}" class="sp-breadcrumb-link">Home</a>
         @if($post->category)
             <span class="sp-breadcrumb-sep">›</span>
-            <a href="{{ url('/category/' . $post->category->slug) }}" style="color: inherit; text-decoration: none;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='inherit'">{{ $post->category->name }}</a>
+            <a href="{{ url('/category/' . $post->category->slug) }}" class="sp-breadcrumb-link">{{ $post->category->name }}</a>
         @endif
         <span class="sp-breadcrumb-sep">›</span>
-        <span class="sp-breadcrumb-current" style="color: #94a3b8; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 450px;">{{ $post->title }}</span>
+        <span class="sp-breadcrumb-current">{{ $post->title }}</span>
     </nav>
 
-    {{-- Layout Container: 70% Content, 30% Sidebar --}}
-    <div class="sp-layout" style="display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 2.5rem; align-items: flex-start;">
+    {{-- Layout Container: Responsive Content + Sidebar --}}
+    <div class="sp-layout">
 
         {{-- ===================== MAIN CONTENT AREA ===================== --}}
-        <main class="sp-main" style="min-width: 0;">
+        <main class="sp-main">
             
             {{-- Category Pill --}}
             @if($post->category)
-                <div style="margin-bottom: 1rem;">
+                <div class="sp-category-badge-wrap">
                     <a href="{{ url('/category/' . $post->category->slug) }}" class="badge-pill-category" style="text-decoration: none;">
                         {{ $post->category->name }}
                     </a>
@@ -147,33 +147,33 @@
             @endif
 
             {{-- Title --}}
-            <h1 class="sp-title" style="font-family: 'Poppins', sans-serif; font-size: 2.25rem; font-weight: 800; color: #1e293b; line-height: 1.25; margin-bottom: 1.25rem;">
+            <h1 class="sp-title">
                 {{ $post->title }}
             </h1>
 
             {{-- Excerpt / Subtitle --}}
             @if($post->excerpt)
-                <p class="sp-excerpt" style="font-size: 1.08rem; line-height: 1.65; color: #475569; margin-bottom: 1.5rem; border-left: 4px solid var(--accent); padding-left: 1.25rem; font-style: italic; background: #f8fafc; padding: 1rem 1.25rem; border-radius: 0 8px 8px 0;">
+                <p class="sp-excerpt">
                     {{ strip_tags($post->excerpt) }}
                 </p>
             @endif
 
             {{-- Author Meta Row --}}
-            <div class="sp-meta-row" style="border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 0.85rem 0; margin-bottom: 2rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
-                <div style="display: flex; align-items: center; gap: 0.75rem;">
-                    <div style="width: 38px; height: 38px; border-radius: 50%; background: var(--accent); color: #ffffff; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.95rem;">
+            <div class="sp-meta-row">
+                <div class="sp-meta-author-box">
+                    <div class="sp-meta-avatar">
                         {{ strtoupper(substr($post->author ? $post->author->name : 'T', 0, 1)) }}
                     </div>
                     <div>
-                        <div style="font-weight: 700; font-size: 0.92rem; color: #1e293b;">
+                        <div class="sp-meta-author-name">
                             {{ $post->author ? $post->author->name : 'TechTV Network' }}
                         </div>
-                        <div style="font-size: 0.75rem; color: #94a3b8;">
+                        <div class="sp-meta-date">
                             Published on {{ $post->published_at ? $post->published_at->format('F j, Y') : $post->created_at->format('F j, Y') }}
                         </div>
                     </div>
                 </div>
-                <div style="display: flex; align-items: center; gap: 0.75rem; color: #64748b; font-size: 0.82rem;">
+                <div class="sp-meta-stats">
                     <span>⏱ {{ $readTime }} min read</span>
                     <span>•</span>
                     <span>👁 {{ number_format($post->view_count) }} views</span>
@@ -182,15 +182,15 @@
 
             {{-- Featured Image --}}
             @if($post->featured_image)
-                <div class="sp-featured-img-wrap" style="margin-bottom: 2.25rem; border-radius: var(--radius-lg, 12px); overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.06); background: #f1f5f9;">
+                <div class="sp-featured-img-wrap">
                     <img src="{{ $post->featured_image_url }}"
                          onerror="this.onerror=null; this.src='https://picsum.photos/seed/{{ $post->id }}/900/500';"
-                         alt="{{ $post->title }}" class="sp-featured-img" style="width: 100%; max-height: 520px; object-fit: cover; display: block;">
+                         alt="{{ $post->title }}" class="sp-featured-img" loading="eager">
                 </div>
             @endif
 
             {{-- Post Body Content --}}
-            <div class="sp-body-content" style="font-size: 1.08rem; line-height: 1.85; color: #334155; margin-bottom: 2.5rem;">
+            <div class="sp-body-content">
                 {!! $post->body !!}
             </div>
 
@@ -219,45 +219,45 @@
             @endif
 
             {{-- Social Share Box & PROPER COPY LINK BUTTON --}}
-            <div class="sp-share-box" style="background: #F8FAFC; border: 1px solid var(--border); border-radius: var(--radius-lg, 12px); padding: 1.75rem; margin-bottom: 2.5rem; text-align: center;">
-                <h4 class="sp-share-title" style="font-family: 'Poppins', sans-serif; font-size: 0.9rem; font-weight: 700; letter-spacing: 0.05em; color: #1e293b; margin-bottom: 1.25rem; text-transform: uppercase;">
+            <div class="sp-share-box">
+                <h4 class="sp-share-title">
                     Share this Article
                 </h4>
-                <div class="sp-share-icons" style="display: flex; justify-content: center; gap: 0.85rem; margin-bottom: 1.5rem; flex-wrap: wrap;">
-                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(request()->url()) }}" target="_blank" rel="noopener noreferrer" class="sp-share-btn" title="Share on Facebook" style="width: 42px; height: 42px; border-radius: 50%; background: #1877f2; display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; transition: transform 0.2s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='none'">
+                <div class="sp-share-icons">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(request()->url()) }}" target="_blank" rel="noopener noreferrer" class="sp-share-btn" title="Share on Facebook" style="background: #1877f2;">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
                     </a>
-                    <a href="https://twitter.com/intent/tweet?url={{ urlencode(request()->url()) }}&text={{ urlencode($post->title) }}" target="_blank" rel="noopener noreferrer" class="sp-share-btn" title="Share on X" style="width: 42px; height: 42px; border-radius: 50%; background: #000000; display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; transition: transform 0.2s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='none'">
+                    <a href="https://twitter.com/intent/tweet?url={{ urlencode(request()->url()) }}&text={{ urlencode($post->title) }}" target="_blank" rel="noopener noreferrer" class="sp-share-btn" title="Share on X" style="background: #000000;">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
                     </a>
-                    <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ urlencode(request()->url()) }}&title={{ urlencode($post->title) }}" target="_blank" rel="noopener noreferrer" class="sp-share-btn" title="Share on LinkedIn" style="width: 42px; height: 42px; border-radius: 50%; background: #0a66c2; display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; transition: transform 0.2s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='none'">
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ urlencode(request()->url()) }}&title={{ urlencode($post->title) }}" target="_blank" rel="noopener noreferrer" class="sp-share-btn" title="Share on LinkedIn" style="background: #0a66c2;">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
                     </a>
-                    <a href="https://api.whatsapp.com/send?text={{ urlencode($post->title . ' ' . request()->url()) }}" target="_blank" rel="noopener noreferrer" class="sp-share-btn" title="Share on WhatsApp" style="width: 42px; height: 42px; border-radius: 50%; background: #25d366; display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; transition: transform 0.2s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='none'">
+                    <a href="https://api.whatsapp.com/send?text={{ urlencode($post->title . ' ' . request()->url()) }}" target="_blank" rel="noopener noreferrer" class="sp-share-btn" title="Share on WhatsApp" style="background: #25d366;">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
                     </a>
                 </div>
                 
                 {{-- Clean & Prominent Copy Link Box --}}
-                <div style="display: flex; gap: 0.5rem; max-width: 500px; margin: 0 auto; background: #ffffff; border: 1px solid var(--border); border-radius: 9999px; padding: 0.35rem 0.35rem 0.35rem 1rem; box-shadow: 0 2px 8px rgba(0,0,0,0.04); align-items: center;">
-                    <span style="font-size: 1rem; color: #94a3b8;">🔗</span>
-                    <input type="text" id="sp-url-input" value="{{ request()->url() }}" readonly style="flex: 1; border: none; background: transparent; font-size: 0.85rem; color: #475569; outline: none; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">
-                    <button id="copy-btn-main" onclick="copyPostUrl()" style="background: var(--accent); color: #ffffff; border: none; padding: 0.6rem 1.4rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 700; cursor: pointer; transition: all 0.25s ease; white-space: nowrap;">
+                <div class="sp-copy-box">
+                    <span style="font-size: 1rem; color: #94a3b8; flex-shrink: 0;">🔗</span>
+                    <input type="text" id="sp-url-input" value="{{ request()->url() }}" readonly class="sp-copy-input">
+                    <button id="copy-btn-main" onclick="copyPostUrl()" class="sp-copy-btn">
                         Copy Link
                     </button>
                 </div>
             </div>
 
             {{-- Prev / Next Post Navigation Cards --}}
-            <div class="sp-nav-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 3rem;">
+            <div class="sp-nav-grid">
                 @if($prevPost)
-                    <a href="{{ url('/post/' . $prevPost->slug) }}" class="sp-nav-card sp-nav-prev" style="display: flex; align-items: center; gap: 0.85rem; padding: 1rem; border: 1px solid var(--border); border-radius: var(--radius-md, 8px); text-decoration: none; background: #ffffff; transition: transform 0.2s, border-color 0.2s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.borderColor='#cbd5e1';" onmouseout="this.style.transform='none'; this.style.borderColor='var(--border)';">
+                    <a href="{{ url('/post/' . $prevPost->slug) }}" class="sp-nav-card sp-nav-prev">
                         <img src="{{ $prevPost->featured_image_url }}"
                              onerror="this.onerror=null; this.src='https://picsum.photos/seed/prev{{ $prevPost->id }}/80/80';"
-                             alt="{{ $prevPost->title }}" class="sp-nav-img" style="width: 55px; height: 55px; object-fit: cover; border-radius: 6px; flex-shrink: 0;">
-                        <div class="sp-nav-body" style="min-width: 0;">
-                            <span class="sp-nav-label" style="font-size: 0.72rem; font-weight: 700; color: var(--accent); text-transform: uppercase;">‹ Previous Article</span>
-                            <span class="sp-nav-post-title" style="font-family: 'Poppins', sans-serif; font-size: 0.85rem; font-weight: 700; color: #1e293b; line-height: 1.35; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-top: 0.2rem;">{{ $prevPost->title }}</span>
+                             alt="{{ $prevPost->title }}" class="sp-nav-img">
+                        <div class="sp-nav-body">
+                            <span class="sp-nav-label">‹ Previous Article</span>
+                            <span class="sp-nav-post-title">{{ $prevPost->title }}</span>
                         </div>
                     </a>
                 @else
@@ -265,13 +265,13 @@
                 @endif
 
                 @if($nextPost)
-                    <a href="{{ url('/post/' . $nextPost->slug) }}" class="sp-nav-card sp-nav-next" style="display: flex; align-items: center; flex-direction: row-reverse; gap: 0.85rem; padding: 1rem; border: 1px solid var(--border); border-radius: var(--radius-md, 8px); text-decoration: none; background: #ffffff; transition: transform 0.2s, border-color 0.2s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.borderColor='#cbd5e1';" onmouseout="this.style.transform='none'; this.style.borderColor='var(--border)';">
+                    <a href="{{ url('/post/' . $nextPost->slug) }}" class="sp-nav-card sp-nav-next">
                         <img src="{{ $nextPost->featured_image_url }}"
                              onerror="this.onerror=null; this.src='https://picsum.photos/seed/next{{ $nextPost->id }}/80/80';"
-                             alt="{{ $nextPost->title }}" class="sp-nav-img" style="width: 55px; height: 55px; object-fit: cover; border-radius: 6px; flex-shrink: 0;">
-                        <div class="sp-nav-body" style="text-align: right; min-width: 0;">
-                            <span class="sp-nav-label" style="font-size: 0.72rem; font-weight: 700; color: var(--accent); text-transform: uppercase;">Next Article ›</span>
-                            <span class="sp-nav-post-title" style="font-family: 'Poppins', sans-serif; font-size: 0.85rem; font-weight: 700; color: #1e293b; line-height: 1.35; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-top: 0.2rem;">{{ $nextPost->title }}</span>
+                             alt="{{ $nextPost->title }}" class="sp-nav-img">
+                        <div class="sp-nav-body">
+                            <span class="sp-nav-label">Next Article ›</span>
+                            <span class="sp-nav-post-title">{{ $nextPost->title }}</span>
                         </div>
                     </a>
                 @endif
@@ -279,14 +279,14 @@
 
             {{-- RELATED STORIES (3-CARD GRID MATCHING HOMEPAGE) --}}
             @if(isset($relatedPosts) && $relatedPosts->count() > 0)
-                <div class="sp-related-section" style="margin-bottom: 3.5rem;">
+                <div class="sp-related-section">
                     <div class="category-block-header" style="margin-bottom: 1.5rem;">
                         <h3 class="category-block-title">Related Stories</h3>
                     </div>
-                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem;">
+                    <div class="sp-related-grid">
                         @foreach($relatedPosts as $rpost)
                             <div class="category-card-col">
-                                <a href="{{ url('/post/' . $rpost->slug) }}" class="category-card-col-img" style="height: 150px;">
+                                <a href="{{ url('/post/' . $rpost->slug) }}" class="category-card-col-img">
                                     <img src="{{ $rpost->featured_image_url }}"
                                         onerror="this.onerror=null; this.src='https://picsum.photos/seed/rel{{ $rpost->id }}/400/250';"
                                         alt="{{ $rpost->title }}" loading="lazy">
@@ -344,7 +344,7 @@
                 @endif
 
                 {{-- CLEAN LEAVE A REPLY FORM WITH BOT SECURITY (MATH PROBLEM) --}}
-                <div id="comment-form-section" style="background: #ffffff; border: 1px solid var(--border); border-radius: 12px; padding: 2rem; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
+                <div id="comment-form-section" class="sp-comment-form-card">
                     <div style="border-left: 3px solid var(--accent); padding-left: 0.75rem; margin-bottom: 1.25rem;">
                         <h4 style="font-family: 'Poppins', sans-serif; font-size: 1.2rem; font-weight: 800; color: #1e293b; margin: 0;">
                             Leave a Reply
@@ -364,7 +364,7 @@
 
                     <form action="{{ url('/post/' . $post->slug . '/comment') }}" method="POST" style="display: flex; flex-direction: column; gap: 1.15rem;">
                         @csrf
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div class="sp-form-grid">
                             <div>
                                 <label style="display: block; font-size: 0.82rem; font-weight: 700; color: #334155; margin-bottom: 0.4rem;">Full Name *</label>
                                 <input type="text" name="author_name" value="{{ old('author_name') }}" placeholder="John Doe" class="input-field" required style="width: 100%; border: 1px solid #cbd5e1; border-radius: 8px; padding: 0.75rem 1rem; font-size: 0.9rem;">
@@ -387,13 +387,13 @@
 
                         {{-- BOT SECURITY FEATURE: MATH PROBLEM --}}
                         <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 1rem 1.25rem;">
-                            <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; font-weight: 700; color: #1e293b; margin-bottom: 0.5rem;">
+                            <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; font-weight: 700; color: #1e293b; margin-bottom: 0.5rem; flex-wrap: wrap;">
                                 <span>🛡️ Anti-Bot Security Check:</span>
                                 <span style="background: #fee2e2; color: #b91c1c; padding: 0.2rem 0.6rem; border-radius: 4px; font-family: monospace; font-size: 1rem;">
                                     What is {{ $captcha_question ?? '4 + 7' }} = ?
                                 </span>
                             </label>
-                            <input type="number" name="captcha_answer" placeholder="Enter number answer" required style="width: 180px; border: 1px solid #cbd5e1; border-radius: 6px; padding: 0.55rem 0.85rem; font-size: 0.9rem; outline: none;">
+                            <input type="number" name="captcha_answer" placeholder="Enter number answer" required style="width: 180px; max-width: 100%; border: 1px solid #cbd5e1; border-radius: 6px; padding: 0.55rem 0.85rem; font-size: 0.9rem; outline: none;">
                             <small style="color: #64748b; font-size: 0.78rem; display: block; margin-top: 0.35rem;">Solve the simple math equation to verify you are human.</small>
                         </div>
 
