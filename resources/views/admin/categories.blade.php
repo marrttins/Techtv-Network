@@ -30,14 +30,14 @@
     </div>
 @endif
 
-<div style="display: grid; grid-template-columns: 1fr; gap: 3rem; align-items: start;">
+<div style="display: grid; grid-template-columns: 1fr; gap: 2.5rem; align-items: start;">
 
     <!-- ========================================== -->
     <!-- 1. CATEGORIES SECTION                      -->
     <!-- ========================================== -->
     <div>
-        <div style="border-left: 3px solid #0B193C; padding-left: 0.75rem; margin-bottom: 1.5rem;">
-            <h2 style="font-size: 1.35rem; font-family: 'Poppins', sans-serif; font-weight: 800; color: #1e293b; margin: 0;">
+        <div style="border-left: 3px solid #0B193C; padding-left: 0.75rem; margin-bottom: 1.25rem;">
+            <h2 style="font-size: 1.3rem; font-family: 'Poppins', sans-serif; font-weight: 800; color: #1e293b; margin: 0;">
                 Article Categories
             </h2>
             <p style="font-size: 0.85rem; color: var(--admin-text-muted); margin: 0.25rem 0 0 0;">
@@ -45,10 +45,10 @@
             </p>
         </div>
         
-        <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 2rem; align-items: start;">
+        <div class="admin-grid-2" style="align-items: start; margin-bottom: 0;">
             <!-- Categories List Table -->
-            <div style="background-color: #ffffff; border: 1px solid var(--admin-border); border-radius: 12px; overflow: hidden; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);">
-                <table class="table-admin" style="margin-top: 0; margin-bottom: 0; border: none; box-shadow: none;">
+            <div class="table-responsive" style="margin-bottom: 0;">
+                <table class="table-admin" style="min-width: 480px;">
                     <thead>
                         <tr>
                             <th>Category Name</th>
@@ -73,7 +73,7 @@
                                         {{ $cat->posts_count }} posts
                                     </span>
                                 </td>
-                                <td style="text-align: right;">
+                                <td style="text-align: right; white-space: nowrap;">
                                     <form action="{{ url('/admin/categories/' . $cat->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete category \'{{ addslashes($cat->name) }}\'? All linked posts will remain safe.');" style="display: inline; margin: 0;">
                                         @csrf
                                         @method('DELETE')
@@ -93,13 +93,13 @@
             </div>
 
             <!-- Create Category Form -->
-            <div style="background-color: #ffffff; border: 1px solid var(--admin-border); border-radius: 12px; padding: 1.5rem; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);">
+            <div style="background-color: #ffffff; border: 1px solid var(--admin-border); border-radius: 12px; padding: 1.25rem; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);">
                 <div style="border-left: 3px solid #0B193C; padding-left: 0.6rem; margin-bottom: 1.25rem;">
                     <h3 style="font-size: 1.05rem; font-family: 'Poppins', sans-serif; font-weight: 700; margin: 0; color: #1e293b;">
                         New Category
                     </h3>
                 </div>
-                <form action="{{ url('/admin/categories') }}" method="POST" style="display: flex; flex-direction: column; gap: 1.25rem;">
+                <form action="{{ url('/admin/categories') }}" method="POST" style="display: flex; flex-direction: column; gap: 1.15rem;">
                     @csrf
                     <div class="form-group" style="margin-bottom: 0;">
                         <label class="form-label" style="font-size: 0.85rem; font-weight: 700; color: #334155;">Category Name *</label>
@@ -123,8 +123,8 @@
     <!-- 2. MENUS & NAVIGATION SECTION              -->
     <!-- ========================================== -->
     <div>
-        <div style="border-left: 3px solid #0B193C; padding-left: 0.75rem; margin-bottom: 1.5rem;">
-            <h2 style="font-size: 1.35rem; font-family: 'Poppins', sans-serif; font-weight: 800; color: #1e293b; margin: 0;">
+        <div style="border-left: 3px solid #0B193C; padding-left: 0.75rem; margin-bottom: 1.25rem;">
+            <h2 style="font-size: 1.3rem; font-family: 'Poppins', sans-serif; font-weight: 800; color: #1e293b; margin: 0;">
                 Navigation Menus
             </h2>
             <p style="font-size: 0.85rem; color: var(--admin-text-muted); margin: 0.25rem 0 0 0;">
@@ -132,13 +132,13 @@
             </p>
         </div>
 
-        <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 2rem; align-items: start;">
+        <div class="admin-grid-2" style="align-items: start;">
             
             <!-- Left: Menu Selector & Creator -->
-            <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+            <div style="display: flex; flex-direction: column; gap: 1.25rem;">
                 
                 <!-- Select Menu Card -->
-                <div style="background-color: #ffffff; border: 1px solid var(--admin-border); border-radius: 12px; padding: 1.5rem; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);">
+                <div style="background-color: #ffffff; border: 1px solid var(--admin-border); border-radius: 12px; padding: 1.25rem; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);">
                     <h3 style="font-size: 1.05rem; font-family: 'Poppins', sans-serif; font-weight: 700; margin: 0 0 1rem 0; color: #1e293b;">
                         Select Menu to Edit
                     </h3>
@@ -170,7 +170,7 @@
                 </div>
 
                 <!-- Create New Menu Card -->
-                <div style="background-color: #ffffff; border: 1px solid var(--admin-border); border-radius: 12px; padding: 1.5rem; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);">
+                <div style="background-color: #ffffff; border: 1px solid var(--admin-border); border-radius: 12px; padding: 1.25rem; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);">
                     <h3 style="font-size: 1.05rem; font-family: 'Poppins', sans-serif; font-weight: 700; margin: 0 0 1rem 0; color: #1e293b;">
                         Create New Menu
                     </h3>
@@ -195,12 +195,12 @@
             </div>
 
             <!-- Right: Menu Items Manager -->
-            <div style="background-color: #ffffff; border: 1px solid var(--admin-border); border-radius: 12px; padding: 1.75rem; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);">
+            <div style="background-color: #ffffff; border: 1px solid var(--admin-border); border-radius: 12px; padding: 1.25rem; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);">
                 @if($activeMenu)
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; flex-wrap: wrap; gap: 0.75rem;">
                         <div>
                             <span style="font-size: 0.75rem; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 0.05em;">Currently Editing</span>
-                            <h3 style="font-size: 1.3rem; font-family: 'Poppins', sans-serif; font-weight: 800; color: #1e293b; margin: 0;">
+                            <h3 style="font-size: 1.2rem; font-family: 'Poppins', sans-serif; font-weight: 800; color: #1e293b; margin: 0;">
                                 {{ $activeMenu->name }}
                             </h3>
                         </div>
@@ -210,18 +210,18 @@
                     </div>
 
                     <!-- Add Item Form -->
-                    <div style="background: #f8fafc; border: 1px solid var(--admin-border); border-radius: 8px; padding: 1.25rem; margin-bottom: 2rem;">
-                        <h4 style="font-size: 0.9rem; font-weight: 700; color: #1e293b; margin: 0 0 1rem 0;">+ Add Menu Item</h4>
-                        <form action="{{ url('/admin/menus/' . $activeMenu->id . '/items') }}" method="POST" style="display: flex; gap: 1rem; align-items: flex-end; flex-wrap: wrap;">
+                    <div style="background: #f8fafc; border: 1px solid var(--admin-border); border-radius: 8px; padding: 1rem; margin-bottom: 1.5rem;">
+                        <h4 style="font-size: 0.9rem; font-weight: 700; color: #1e293b; margin: 0 0 0.85rem 0;">+ Add Menu Item</h4>
+                        <form action="{{ url('/admin/menus/' . $activeMenu->id . '/items') }}" method="POST" style="display: flex; flex-direction: column; gap: 0.85rem;">
                             @csrf
-                            <div style="flex: 1; min-width: 160px;">
+                            <div>
                                 <label class="form-label" style="font-size: 0.8rem; font-weight: 700; color: #475569;">Link Label *</label>
                                 <input class="input-field" type="text" name="label" placeholder="e.g. Artificial Intelligence" required>
                             </div>
-                            <div style="flex: 2; min-width: 260px;">
+                            <div>
                                 <label class="form-label" style="font-size: 0.8rem; font-weight: 700; color: #475569;">Destination URL *</label>
-                                <div style="display: flex; gap: 0.5rem;">
-                                    <select class="input-field" onchange="if(this.value){document.getElementById('custom_url').value = this.value;}" style="width: 150px; font-size: 0.82rem;">
+                                <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                                    <select class="input-field" onchange="if(this.value){document.getElementById('custom_url').value = this.value;}" style="flex: 1 1 140px; font-size: 0.82rem;">
                                         <option value="">-- Quick Pick --</option>
                                         <option value="/">🏠 Home (/)</option>
                                         <option value="/about">About Us (/about)</option>
@@ -231,10 +231,10 @@
                                             <option value="/category/{{ $cat->slug }}">{{ $cat->name }}</option>
                                         @endforeach
                                     </select>
-                                    <input class="input-field" type="text" name="url" id="custom_url" placeholder="/path or https://..." required style="flex: 1;">
+                                    <input class="input-field" type="text" name="url" id="custom_url" placeholder="/path or https://..." required style="flex: 2 1 180px;">
                                 </div>
                             </div>
-                            <div style="flex: 1; min-width: 160px;">
+                            <div>
                                 <label class="form-label" style="font-size: 0.8rem; font-weight: 700; color: #475569;">Parent (Dropdown)</label>
                                 <select name="parent_id" class="input-field">
                                     <option value="">None (Top Level)</option>
@@ -243,7 +243,7 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <button class="btn-admin-cta" type="submit" style="padding: 0.75rem 1.25rem; white-space: nowrap;">
+                            <button class="btn-admin-cta" type="submit" style="padding: 0.65rem 1.25rem; width: 100%; justify-content: center;">
                                 Add Link
                             </button>
                         </form>
@@ -251,7 +251,7 @@
 
                     <!-- Items List -->
                     @if($activeMenu->items->isEmpty())
-                        <div style="text-align: center; color: var(--admin-text-muted); padding: 3rem 1.5rem; background: #f8fafc; border-radius: 8px; border: 1px dashed var(--admin-border);">
+                        <div style="text-align: center; color: var(--admin-text-muted); padding: 2.5rem 1rem; background: #f8fafc; border-radius: 8px; border: 1px dashed var(--admin-border);">
                             <p style="margin: 0; font-weight: 600;">No items added to this menu yet.</p>
                             <small style="color: #94a3b8;">Use the form above to add navigation links and dropdown sub-items.</small>
                         </div>
@@ -259,15 +259,15 @@
                         <div id="menu-items-list" style="display: flex; flex-direction: column; gap: 0.65rem;">
                             @foreach($activeMenu->items->whereNull('parent_id')->sortBy('order') as $item)
                                 <!-- Top-Level Item -->
-                                <div class="menu-item-row" data-id="{{ $item->id }}" style="display: flex; align-items: center; justify-content: space-between; padding: 0.85rem 1.15rem; background: #f8fafc; border: 1px solid var(--admin-border); border-radius: 8px; transition: border-color 0.2s;">
-                                    <div style="display: flex; align-items: center; gap: 1rem; min-width: 0;">
+                                <div class="menu-item-row" data-id="{{ $item->id }}" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.5rem; padding: 0.75rem 1rem; background: #f8fafc; border: 1px solid var(--admin-border); border-radius: 8px;">
+                                    <div style="display: flex; align-items: center; gap: 0.75rem; min-width: 0; flex: 1 1 200px;">
                                         <span style="cursor: grab; color: #94a3b8; font-size: 1.1rem;" title="Drag order">☰</span>
-                                        <span style="font-weight: 700; color: #1e293b; font-size: 0.92rem;">{{ $item->label }}</span>
-                                        <span style="color: #64748b; font-size: 0.82rem; font-family: monospace; background: #e2e8f0; padding: 0.15rem 0.45rem; border-radius: 4px;">{{ $item->url }}</span>
+                                        <span style="font-weight: 700; color: #1e293b; font-size: 0.9rem;">{{ $item->label }}</span>
+                                        <span style="color: #64748b; font-size: 0.78rem; font-family: monospace; background: #e2e8f0; padding: 0.15rem 0.45rem; border-radius: 4px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ $item->url }}</span>
                                     </div>
-                                    <div style="display: flex; align-items: center; gap: 0.75rem;">
-                                        <input type="number" class="item-order-input" value="{{ $item->order }}" style="width: 55px; padding: 0.35rem; border: 1px solid var(--admin-border); border-radius: 6px; text-align: center; font-weight: 600;" title="Order Index">
-                                        <form action="{{ url('/admin/menu-items/' . $item->id . '/delete') }}" method="POST" onsubmit="return confirm('Remove menu item \'{{ addslashes($item->label) }}\' and any child links?');" style="margin: 0; display: inline;">
+                                    <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                        <input type="number" class="item-order-input" value="{{ $item->order }}" style="width: 50px; padding: 0.35rem; border: 1px solid var(--admin-border); border-radius: 6px; text-align: center; font-weight: 600; font-size: 0.85rem;" title="Order Index">
+                                        <form action="{{ url('/admin/menu-items/' . $item->id) }}" method="POST" onsubmit="return confirm('Remove menu item \'{{ addslashes($item->label) }}\' and any child links?');" style="margin: 0; display: inline;">
                                             @csrf
                                             @method('DELETE')
                                             <input type="hidden" name="menu_id" value="{{ $activeMenu->id }}">
@@ -280,15 +280,15 @@
 
                                 <!-- Child Dropdown Items -->
                                 @foreach($activeMenu->items->where('parent_id', $item->id)->sortBy('order') as $child)
-                                    <div class="menu-item-row" data-id="{{ $child->id }}" style="display: flex; align-items: center; justify-content: space-between; padding: 0.65rem 1rem; background: #ffffff; border: 1px dashed var(--admin-border); border-left: 3px solid #0284c7; border-radius: 6px; margin-left: 2.25rem;">
-                                        <div style="display: flex; align-items: center; gap: 0.85rem; min-width: 0;">
+                                    <div class="menu-item-row" data-id="{{ $child->id }}" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.5rem; padding: 0.65rem 0.85rem; background: #ffffff; border: 1px dashed var(--admin-border); border-left: 3px solid #0284c7; border-radius: 6px; margin-left: 1.25rem;">
+                                        <div style="display: flex; align-items: center; gap: 0.65rem; min-width: 0; flex: 1 1 180px;">
                                             <span style="cursor: grab; color: #94a3b8;" title="Drag order">↳ ☰</span>
-                                            <span style="font-weight: 600; color: #334155; font-size: 0.88rem;">{{ $child->label }}</span>
-                                            <span style="color: #64748b; font-size: 0.78rem; font-family: monospace; background: #f1f5f9; padding: 0.1rem 0.4rem; border-radius: 4px;">{{ $child->url }}</span>
+                                            <span style="font-weight: 600; color: #334155; font-size: 0.85rem;">{{ $child->label }}</span>
+                                            <span style="color: #64748b; font-size: 0.75rem; font-family: monospace; background: #f1f5f9; padding: 0.1rem 0.4rem; border-radius: 4px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ $child->url }}</span>
                                         </div>
-                                        <div style="display: flex; align-items: center; gap: 0.75rem;">
-                                            <input type="number" class="item-order-input" value="{{ $child->order }}" style="width: 55px; padding: 0.35rem; border: 1px solid var(--admin-border); border-radius: 6px; text-align: center; font-size: 0.85rem;" title="Order Index">
-                                            <form action="{{ url('/admin/menu-items/' . $child->id . '/delete') }}" method="POST" onsubmit="return confirm('Remove sub-item \'{{ addslashes($child->label) }}\'?');" style="margin: 0; display: inline;">
+                                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                            <input type="number" class="item-order-input" value="{{ $child->order }}" style="width: 50px; padding: 0.35rem; border: 1px solid var(--admin-border); border-radius: 6px; text-align: center; font-size: 0.85rem;" title="Order Index">
+                                            <form action="{{ url('/admin/menu-items/' . $child->id) }}" method="POST" onsubmit="return confirm('Remove sub-item \'{{ addslashes($child->label) }}\'?');" style="margin: 0; display: inline;">
                                                 @csrf
                                                 @method('DELETE')
                                                 <input type="hidden" name="menu_id" value="{{ $activeMenu->id }}">
@@ -303,10 +303,10 @@
                         </div>
                     @endif
                 @else
-                    <div style="text-align: center; color: var(--admin-text-muted); padding: 4rem 2rem;">
-                        <span style="font-size: 3rem; display: block; margin-bottom: 1rem;">🧭</span>
-                        <h4 style="font-size: 1.1rem; font-weight: 700; color: #1e293b; margin-bottom: 0.5rem;">No Menu Selected</h4>
-                        <p style="color: #64748b; font-size: 0.9rem;">Select or create a menu from the left panel to manage its navigation links.</p>
+                    <div style="text-align: center; color: var(--admin-text-muted); padding: 3rem 1rem;">
+                        <span style="font-size: 2.5rem; display: block; margin-bottom: 0.75rem;">🧭</span>
+                        <h4 style="font-size: 1.05rem; font-weight: 700; color: #1e293b; margin-bottom: 0.35rem;">No Menu Selected</h4>
+                        <p style="color: #64748b; font-size: 0.85rem; margin: 0;">Select or create a menu from the left panel to manage its navigation links.</p>
                     </div>
                 @endif
             </div>
@@ -325,7 +325,7 @@ function removeItem(itemId, label) {
     
     const form = document.createElement('form');
     form.method = 'POST';
-    form.action = '{{ url("/admin/menu-items") }}/' + itemId + '/delete';
+    form.action = '{{ url("/admin/menu-items") }}/' + itemId;
     
     const csrf = document.createElement('input');
     csrf.type = 'hidden';

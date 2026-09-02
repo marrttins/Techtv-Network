@@ -8,6 +8,8 @@ use App\Models\Category;
 use App\Models\Tag;
 use App\Models\Comment;
 use App\Models\Newsletter;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Log;
 
 class BlogController extends Controller
 {
@@ -312,7 +314,69 @@ class BlogController extends Controller
 
     public function contact()
     {
-        return view('pages.contact');
+        $num1 = random_int(2, 9);
+        $num2 = random_int(1, 9);
+        session(['contact_captcha_answer' => $num1 + $num2]);
+        $contactEmail = config('mail.from.address', env('MAIL_FROM_ADDRESS', 'info@techtvnetwork.ng'));
+
+        return view('pages.contact', [
+            'captcha_question' => "{$num1} + {$num2}",
+            'contact_email' => $contactEmail,
+        ]);
+    }
+
+    public function submitContact(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:100',
+            'email' => 'required|email|max:150',
+            'subject' => 'required|string|max:150',
+            'message' => 'required|string|max:5000',
+            'captcha_answer' => 'required|numeric',
+        ]);
+
+        $expectedCaptcha = session('contact_captcha_answer');
+
+        if (!$expectedCaptcha || (int) $validated['captcha_answer'] !== (int) $expectedCaptcha) {
+            // Generate a fresh captcha for retry
+            $num1 = random_int(2, 9);
+            $num2 = random_int(1, 9);
+            session(['contact_captcha_answer' => $num1 + $num2]);
+
+            return redirect()->back()
+                ->withInput($request->except('captcha_answer'))
+                ->withErrors(['captcha_answer' => 'Incorrect security captcha answer. Please solve the math problem and try again.']);
+        }
+
+        // Clear captcha session after valid use
+        session()->forget('contact_captcha_answer');
+
+        $adminEmail = config('mail.from.address', env('MAIL_FROM_ADDRESS', 'info@techtvnetwork.ng'));
+        $senderName = $validated['name'];
+        $senderEmail = $validated['email'];
+        $msgSubject = $validated['subject'];
+        $msgBody = $validated['message'];
+        $clientIp = $request->ip();
+
+        // Attempt to send email to admin
+        try {
+            Mail::send('emails.contact-message', [
+                'senderName' => $senderName,
+                'senderEmail' => $senderEmail,
+                'msgSubject' => $msgSubject,
+                'msgBody' => $msgBody,
+                'clientIp' => $clientIp,
+                'adminEmail' => $adminEmail,
+            ], function ($message) use ($adminEmail, $senderName, $senderEmail, $msgSubject) {
+                $message->to($adminEmail)
+                        ->replyTo($senderEmail, $senderName)
+                        ->subject("[TechTV Contact] {$msgSubject} - From {$senderName}");
+            });
+        } catch (\Throwable $e) {
+            Log::error('Contact Form Email Sending Error: ' . $e->getMessage());
+        }
+
+        return redirect('/contact')->with('success', "Thank you! Your message has been sent successfully to {$adminEmail}. Our editorial team will get back to you shortly.");
     }
 
     public function privacyPolicy()

@@ -8,6 +8,7 @@ Route::get('/', [BlogController::class, 'index']);
 Route::get('/about', [BlogController::class, 'about']);
 Route::get('/advertise', [BlogController::class, 'advertise']);
 Route::get('/contact', [BlogController::class, 'contact']);
+Route::post('/contact', [BlogController::class, 'submitContact']);
 Route::get('/privacy-policy', [BlogController::class, 'privacyPolicy']);
 Route::get('/terms-of-service', [BlogController::class, 'termsOfService']);
 Route::get('/terms', [BlogController::class, 'termsOfService']);
@@ -64,17 +65,17 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware(['permission:manage_categories_menus'])->group(function () {
         Route::get('/admin/categories', [AdminController::class, 'categories']);
         Route::post('/admin/categories', [AdminController::class, 'storeCategory']);
-        Route::delete('/admin/categories/{id}', [AdminController::class, 'deleteCategory']);
-        Route::post('/admin/categories/{id}/delete', [AdminController::class, 'deleteCategory']);
+        Route::match(['POST', 'DELETE'], '/admin/categories/{id}', [AdminController::class, 'deleteCategory']);
+        Route::match(['POST', 'DELETE'], '/admin/categories/{id}/delete', [AdminController::class, 'deleteCategory']);
         
         // Menu Management
         Route::post('/admin/menus', [AdminController::class, 'storeMenu']);
-        Route::delete('/admin/menus/{id}', [AdminController::class, 'deleteMenu']);
-        Route::post('/admin/menus/{id}/delete', [AdminController::class, 'deleteMenu']);
+        Route::match(['POST', 'DELETE'], '/admin/menus/{id}', [AdminController::class, 'deleteMenu']);
+        Route::match(['POST', 'DELETE'], '/admin/menus/{id}/delete', [AdminController::class, 'deleteMenu']);
         Route::post('/admin/menus/{id}/items', [AdminController::class, 'storeMenuItem']);
         Route::post('/admin/menu-items/reorder', [AdminController::class, 'updateMenuItemOrder']);
-        Route::delete('/admin/menu-items/{id}', [AdminController::class, 'deleteMenuItem']);
-        Route::post('/admin/menu-items/{id}/delete', [AdminController::class, 'deleteMenuItem']);
+        Route::match(['POST', 'DELETE'], '/admin/menu-items/{id}', [AdminController::class, 'deleteMenuItem']);
+        Route::match(['POST', 'DELETE'], '/admin/menu-items/{id}/delete', [AdminController::class, 'deleteMenuItem']);
     });
     
     // Comment Moderation

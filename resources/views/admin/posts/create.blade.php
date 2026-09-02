@@ -29,7 +29,7 @@
   });
 </script>
 
-<div style="background-color: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 2.5rem; box-shadow: var(--shadow-soft); max-width: 900px; margin: 0 auto;">
+<div class="admin-form-container">
 
     @if($errors->any())
         <div style="background: #fee2e2; border: 1px solid #fca5a5; color: #991b1b; padding: 1rem 1.25rem; border-radius: var(--radius-md); margin-bottom: 1.5rem; font-size: 0.9rem;">
@@ -42,7 +42,7 @@
         </div>
     @endif
 
-    <form id="postForm" action="{{ url('/admin/posts') }}" method="POST" enctype="multipart/form-data" style="display: flex; flex-direction: column; gap: 1.5rem;">
+    <form id="postForm" action="{{ url('/admin/posts') }}" method="POST" enctype="multipart/form-data" style="display: flex; flex-direction: column; gap: 1.25rem;">
         @csrf
         
         <!-- Title -->
@@ -64,7 +64,7 @@
         </div>
 
         <!-- Two Column Grid for Metadata -->
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+        <div class="admin-form-row-2">
             <!-- Category -->
             <div class="form-group">
                 <label class="form-label" for="category_id">Category</label>
@@ -111,9 +111,9 @@
                 <img id="image-preview" src="" alt="preview" style="max-width: 150px; height: auto; border-radius: var(--radius-sm); border: 1px solid var(--border); display: none;">
             </div>
             
-            <div style="display: flex; gap: 1rem; align-items: center;">
-                <input type="file" id="featured_image" name="featured_image" class="input-field" accept="image/*" onchange="previewImage(event)" style="flex: 1;">
-                <span style="font-size: 0.9rem; color: var(--text-muted);">OR</span>
+            <div style="display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap;">
+                <input type="file" id="featured_image" name="featured_image" class="input-field" accept="image/*" onchange="previewImage(event)" style="flex: 1 1 200px;">
+                <span style="font-size: 0.85rem; color: var(--text-muted); font-weight: 700;">OR</span>
                 <button type="button" class="btn-action" onclick="openMediaModal()">Select from Media</button>
             </div>
             <input type="hidden" id="featured_image_path" name="featured_image_path" value="{{ old('featured_image_path', '') }}">
@@ -162,18 +162,18 @@
         </div>
 
         <!-- Action Buttons -->
-        <div style="display: flex; gap: 1rem; justify-content: flex-end; margin-top: 1.5rem;">
-            <a href="{{ url('/admin/posts') }}" class="btn-action" style="padding: 0.85rem 1.5rem;">Cancel</a>
-            <button class="btn-submit" type="submit" style="padding: 0.85rem 2rem;">Save Post</button>
+        <div style="display: flex; gap: 0.75rem; justify-content: flex-end; flex-wrap: wrap; margin-top: 1rem;">
+            <a href="{{ url('/admin/posts') }}" class="btn-action" style="padding: 0.75rem 1.5rem; text-decoration: none;">Cancel</a>
+            <button class="btn-submit" type="submit" style="padding: 0.75rem 2rem;">Save Post</button>
         </div>
     </form>
 </div>
 
 <!-- Media Modal -->
-<div id="mediaModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center;">
-    <div style="background: var(--surface); width: 80%; max-width: 800px; height: 80%; border-radius: var(--radius-lg); display: flex; flex-direction: column; overflow: hidden; box-shadow: var(--shadow-strong);">
-        <div style="padding: 1rem 1.5rem; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center;">
-            <h3 style="margin: 0; font-family: 'Outfit';">Select Featured Image</h3>
+<div id="mediaModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 10000; align-items: center; justify-content: center; padding: 1rem; backdrop-filter: blur(3px);">
+    <div style="background: var(--surface); width: 95%; max-width: 800px; height: 85vh; border-radius: var(--radius-lg); display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.25);">
+        <div style="padding: 1rem 1.25rem; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center;">
+            <h3 style="margin: 0; font-family: 'Outfit'; font-size: 1.15rem;">Select Featured Image</h3>
             <button type="button" onclick="closeMediaModal()" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-muted);">&times;</button>
         </div>
         

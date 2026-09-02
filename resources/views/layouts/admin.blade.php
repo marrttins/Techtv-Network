@@ -503,10 +503,70 @@
             box-shadow: 0 6px 20px rgba(224, 32, 32, 0.35);
         }
 
+        /* Responsive Table Container */
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            border-radius: 12px;
+            border: 1px solid var(--admin-border);
+            background: #ffffff;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+        }
+
+        .table-responsive > .table-admin {
+            margin: 0 !important;
+            border: none !important;
+            box-shadow: none !important;
+            border-radius: 0 !important;
+            min-width: 650px;
+        }
+
+        /* Responsive Grid & Layout Utilities */
+        .admin-grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .admin-grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .admin-form-row-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .admin-form-container {
+            background-color: var(--surface, #ffffff);
+            border: 1px solid var(--border, var(--admin-border));
+            border-radius: var(--radius-lg, 12px);
+            padding: 2.5rem;
+            box-shadow: var(--shadow-soft, 0 2px 10px rgba(0,0,0,0.03));
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .admin-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1.25rem;
+        }
+
         /* Mobile Admin Topbar & Drawer */
         .admin-mobile-topbar {
             display: none;
-            background: #0B193C;
+            background: linear-gradient(135deg, #0B193C 0%, #081028 100%);
             padding: 0.85rem 1.25rem;
             color: #ffffff;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -515,50 +575,64 @@
             position: sticky;
             top: 0;
             z-index: 999;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
         }
 
         .admin-mobile-toggle {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.25);
             color: #ffffff;
-            font-size: 1.25rem;
-            padding: 0.35rem 0.65rem;
-            border-radius: 6px;
+            font-size: 1.3rem;
+            padding: 0.4rem 0.75rem;
+            border-radius: 8px;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             line-height: 1;
+            transition: background 0.2s ease;
+        }
+
+        .admin-mobile-toggle:active {
+            background: rgba(255, 255, 255, 0.25);
         }
 
         .admin-sidebar-backdrop {
             display: none;
             position: fixed;
             inset: 0;
-            background: rgba(0, 0, 0, 0.65);
-            backdrop-filter: blur(3px);
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(4px);
             z-index: 9998;
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
 
         .admin-sidebar-backdrop.is-open {
             display: block;
+            opacity: 1;
         }
 
         .admin-sidebar-close {
             display: none;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.15);
             border: none;
             color: #ffffff;
-            font-size: 1.25rem;
-            width: 32px;
-            height: 32px;
-            border-radius: 6px;
+            font-size: 1.4rem;
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
             cursor: pointer;
             align-items: center;
             justify-content: center;
             line-height: 1;
         }
 
+        .admin-sidebar-close:hover {
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        /* Responsive Breakpoints */
         @media (max-width: 1024px) {
             .admin-layout {
                 flex-direction: column;
@@ -575,18 +649,84 @@
                 top: 0;
                 left: 0;
                 bottom: 0;
-                width: 280px;
+                width: 290px;
                 height: 100vh;
                 max-height: 100vh;
                 transform: translateX(-100%);
                 z-index: 9999;
-                box-shadow: 0 0 35px rgba(0, 0, 0, 0.5);
+                box-shadow: 0 0 40px rgba(0, 0, 0, 0.6);
             }
             .admin-sidebar.is-open {
                 transform: translateX(0);
             }
             .admin-content {
-                padding: 1.5rem 1rem 3rem;
+                padding: 1.75rem 1.25rem 3.5rem;
+            }
+            .admin-grid-2 {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .admin-content {
+                padding: 1.25rem 0.85rem 3rem;
+            }
+            .admin-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+                margin-bottom: 1.5rem;
+                padding-bottom: 1rem;
+            }
+            .admin-header-title {
+                font-size: 1.45rem;
+            }
+            .admin-header-actions {
+                width: 100%;
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+            .admin-header-actions .btn-admin-cta,
+            .admin-header-actions .btn-admin-outline {
+                flex: 1 1 auto;
+                justify-content: center;
+                text-align: center;
+                font-size: 0.82rem;
+                padding: 0.55rem 0.85rem;
+            }
+            .admin-form-row-2 {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            .admin-form-container {
+                padding: 1.25rem 1rem !important;
+                border-radius: 8px;
+            }
+            .stat-card-modern {
+                padding: 1.15rem;
+            }
+            .stat-card-value {
+                font-size: 1.65rem;
+            }
+            .table-admin th,
+            .table-admin td {
+                padding: 0.75rem 0.85rem;
+                font-size: 0.85rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .admin-header-title {
+                font-size: 1.3rem;
+            }
+            .admin-header-actions {
+                flex-direction: column;
+            }
+            .admin-header-actions .btn-admin-cta,
+            .admin-header-actions .btn-admin-outline {
+                width: 100%;
             }
         }
     </style>
@@ -598,13 +738,19 @@
             <button type="button" class="admin-mobile-toggle" onclick="toggleAdminSidebar()" aria-label="Toggle Admin Menu">
                 ☰
             </button>
-            <span style="font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 1.05rem; letter-spacing: 0.02em;">
-                TechTV Admin
-            </span>
+            <a href="{{ url('/admin') }}" style="display: flex; align-items: center; gap: 0.5rem; text-decoration: none; color: #ffffff;">
+                <img src="{{ asset('assets/img/logo.jpg') }}" alt="TechTV" style="height: 28px; width: auto; border-radius: 4px;">
+                <span style="font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 1rem; letter-spacing: 0.02em;">
+                    Admin
+                </span>
+            </a>
         </div>
         <div style="display: flex; align-items: center; gap: 0.5rem;">
-            <a href="{{ url('/') }}" target="_blank" style="color: #94a3b8; font-size: 0.82rem; text-decoration: none; display: flex; align-items: center; gap: 0.25rem;">
-                <span>🌐 Site</span>
+            <a href="{{ url('/admin/profile') }}" title="My Profile" style="width: 32px; height: 32px; border-radius: 50%; background: var(--accent, #e02020); color: #ffffff; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.8rem; text-decoration: none; border: 1px solid rgba(255,255,255,0.3);">
+                {{ strtoupper(substr(auth()->user() ? auth()->user()->name : 'A', 0, 1)) }}
+            </a>
+            <a href="{{ url('/') }}" target="_blank" class="btn-action" style="background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.2); color: #ffffff; font-size: 0.75rem; padding: 0.35rem 0.65rem; text-decoration: none;">
+                🌐 Site
             </a>
         </div>
     </div>

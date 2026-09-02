@@ -6,33 +6,33 @@
 
     {{-- Filter Header Bar --}}
     <div
-        style="background-color: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-bottom: 1.5rem; box-shadow: var(--shadow-soft);">
+        style="background-color: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1rem 1.25rem; margin-bottom: 1.5rem; box-shadow: var(--shadow-soft);">
         <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem;">
 
             {{-- Left: Status Filters & Search Form --}}
             <form action="{{ url('/admin/posts') }}" method="GET"
-                style="display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem; flex: 1;">
+                style="display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; flex: 1 1 auto; width: 100%;">
                 {{-- Status Tabs --}}
-                <a href="{{ url('/admin/posts') }}" class="btn-action {{ !request('status') ? 'active-filter' : '' }}"
-                    style="text-decoration: none;">
-                    All
-                </a>
-                <a href="{{ url('/admin/posts?status=publish') }}"
-                    class="btn-action {{ request('status') === 'publish' ? 'active-filter' : '' }}"
-                    style="text-decoration: none;">
-                    Published
-                </a>
-                <a href="{{ url('/admin/posts?status=draft') }}"
-                    class="btn-action {{ request('status') === 'draft' ? 'active-filter' : '' }}"
-                    style="text-decoration: none;">
-                    Drafts
-                </a>
-
-                <div style="height: 24px; width: 1px; background-color: var(--border); margin: 0 0.25rem;"></div>
+                <div style="display: flex; gap: 0.35rem; flex-wrap: wrap;">
+                    <a href="{{ url('/admin/posts') }}" class="btn-action {{ !request('status') ? 'active-filter' : '' }}"
+                        style="text-decoration: none; padding: 0.4rem 0.75rem; font-size: 0.82rem;">
+                        All
+                    </a>
+                    <a href="{{ url('/admin/posts?status=publish') }}"
+                        class="btn-action {{ request('status') === 'publish' ? 'active-filter' : '' }}"
+                        style="text-decoration: none; padding: 0.4rem 0.75rem; font-size: 0.82rem;">
+                        Published
+                    </a>
+                    <a href="{{ url('/admin/posts?status=draft') }}"
+                        class="btn-action {{ request('status') === 'draft' ? 'active-filter' : '' }}"
+                        style="text-decoration: none; padding: 0.4rem 0.75rem; font-size: 0.82rem;">
+                        Drafts
+                    </a>
+                </div>
 
                 {{-- Category Dropdown --}}
                 <select name="category_id" class="input-field"
-                    style="width: auto; padding: 0.45rem 0.85rem; font-size: 0.85rem;" onchange="this.form.submit()">
+                    style="width: auto; max-width: 100%; padding: 0.4rem 0.75rem; font-size: 0.82rem; flex: 1 1 140px;" onchange="this.form.submit()">
                     <option value="">All Categories</option>
                     @foreach($categories as $cat)
                         <option value="{{ $cat->id }}" {{ request('category_id') == $cat->id ? 'selected' : '' }}>{{ $cat->name }}
@@ -41,21 +41,21 @@
                 </select>
 
                 {{-- Search Input --}}
-                <div style="display: flex; gap: 0.35rem; flex: 1; max-width: 320px;">
+                <div style="display: flex; gap: 0.35rem; flex: 1 1 200px; max-width: 100%;">
                     <input type="text" name="search" value="{{ request('search') }}" placeholder="Search posts..."
-                        class="input-field" style="padding: 0.45rem 0.85rem; font-size: 0.85rem;">
-                    <button type="submit" class="btn-action" style="padding: 0.45rem 0.85rem;">Search</button>
+                        class="input-field" style="padding: 0.4rem 0.75rem; font-size: 0.82rem; min-width: 120px;">
+                    <button type="submit" class="btn-action" style="padding: 0.4rem 0.75rem; font-size: 0.82rem;">Search</button>
                     @if(request()->hasAny(['search', 'status', 'category_id']))
                         <a href="{{ url('/admin/posts') }}" class="btn-action"
-                            style="color: var(--accent); text-decoration: none; padding: 0.45rem 0.85rem;">Clear</a>
+                            style="color: var(--accent); text-decoration: none; padding: 0.4rem 0.75rem; font-size: 0.82rem;">Clear</a>
                     @endif
                 </div>
             </form>
 
             {{-- Right: New Post Button --}}
-            <div>
+            <div style="width: 100%; display: flex; justify-content: flex-end;">
                 <a href="{{ url('/admin/posts/create') }}" class="btn-submit"
-                    style="padding: 0.6rem 1.25rem; font-size: 0.88rem; text-decoration: none;">
+                    style="padding: 0.55rem 1.25rem; font-size: 0.85rem; text-decoration: none; width: auto;">
                     + New Post
                 </a>
             </div>
@@ -68,10 +68,10 @@
 
         {{-- Bulk Action Controls Bar --}}
         <div
-            style="display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 1rem; padding: 0.75rem 1rem; background-color: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md);">
-            <div style="display: flex; align-items: center; gap: 0.75rem;">
+            style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.75rem; margin-bottom: 1rem; padding: 0.75rem 1rem; background-color: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md);">
+            <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem;">
                 <select name="action" id="bulk-action-select" class="input-field"
-                    style="width: auto; padding: 0.4rem 0.75rem; font-size: 0.85rem;">
+                    style="width: auto; padding: 0.35rem 0.65rem; font-size: 0.82rem;">
                     <option value="">-- Bulk Actions --</option>
                     <option value="publish">Mark as Published</option>
                     <option value="draft">Mark as Draft</option>
@@ -79,36 +79,35 @@
                 </select>
 
                 <button type="submit" class="btn-action" id="apply-bulk-btn"
-                    style="padding: 0.4rem 0.9rem; font-weight: 700;">
+                    style="padding: 0.35rem 0.75rem; font-weight: 700; font-size: 0.82rem;">
                     Apply
                 </button>
 
-                <span id="selected-count" style="font-size: 0.82rem; color: var(--text-muted); font-weight: 600;">
-                    0 items selected
+                <span id="selected-count" style="font-size: 0.8rem; color: var(--text-muted); font-weight: 600;">
+                    0 selected
                 </span>
             </div>
 
-            <div style="font-size: 0.85rem; color: var(--text-muted);">
+            <div style="font-size: 0.82rem; color: var(--text-muted);">
                 Showing {{ $posts->firstItem() ?? 0 }} - {{ $posts->lastItem() ?? 0 }} of {{ $posts->total() }} posts
             </div>
         </div>
 
         {{-- Table --}}
-        <div
-            style="overflow-x: auto; border-radius: var(--radius-lg); border: 1px solid var(--border); box-shadow: var(--shadow-soft);">
-            <table class="table-admin" style="margin-top: 0;">
+        <div class="table-responsive">
+            <table class="table-admin" style="min-width: 750px;">
                 <thead>
                     <tr>
                         <th style="width: 40px; text-align: center;">
                             <input type="checkbox" id="select-all" style="cursor: pointer; width: 16px; height: 16px;">
                         </th>
-                        <th style="width: 70px;">Thumbnail</th>
-                        <th>Title</th>
+                        <th style="width: 65px;">Thumbnail</th>
+                        <th style="min-width: 220px;">Title</th>
                         <th>Category</th>
                         <th>Author</th>
                         <th>Views</th>
                         <th>Status</th>
-                        <th style="text-align: right;">Actions</th>
+                        <th style="text-align: right; min-width: 110px;">Actions</th>
                     </tr>
                 </thead>
                 <tbody>

@@ -3,7 +3,7 @@
 @section('header_title', 'Add Popup')
 
 @section('admin_content')
-<div style="background: #ffffff; border: 1px solid var(--admin-border); border-radius: 12px; padding: 2rem; max-width: 700px; box-shadow: 0 2px 10px rgba(0,0,0,0.03);">
+<div class="admin-form-container" style="max-width: 750px;">
     <form action="{{ url('admin/popups') }}" method="POST" enctype="multipart/form-data">
         @csrf
         
@@ -89,8 +89,8 @@
                 <img id="image-preview" src="" alt="preview" style="max-width: 280px; max-height: 200px; border-radius: 6px; display: none; object-fit: contain;">
             </div>
             
-            <div style="display: flex; gap: 0.75rem; align-items: center;">
-                <input type="file" id="image" name="image" class="input-field" accept="image/*" onchange="previewImage(event)" style="flex: 1;">
+            <div style="display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap;">
+                <input type="file" id="image" name="image" class="input-field" accept="image/*" onchange="previewImage(event)" style="flex: 1 1 200px;">
                 <span style="font-size: 0.85rem; color: var(--admin-text-muted); font-weight: 700;">OR</span>
                 <button type="button" class="btn-action" onclick="openMediaModal()">📁 Media Library</button>
             </div>
@@ -111,7 +111,7 @@
         </div>
 
         <!-- Action Buttons -->
-        <div style="display: flex; gap: 1rem; justify-content: flex-end; margin-top: 2rem;">
+        <div style="display: flex; gap: 0.75rem; justify-content: flex-end; flex-wrap: wrap; margin-top: 1.5rem;">
             <a href="{{ url('/admin/popups') }}" class="btn-action" style="padding: 0.75rem 1.5rem; text-decoration: none;">Cancel</a>
             <button class="btn-submit" type="submit" style="padding: 0.75rem 2rem; border: none; cursor: pointer;">
                 Save Popup
@@ -121,23 +121,23 @@
 </div>
 
 <!-- Media Library Modal -->
-<div id="mediaModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 10000; align-items: center; justify-content: center; backdrop-filter: blur(3px);">
-    <div style="background: #ffffff; width: 85%; max-width: 820px; height: 80%; border-radius: 12px; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.25);">
-        <div style="padding: 1.25rem 1.5rem; border-bottom: 1px solid var(--admin-border); display: flex; justify-content: space-between; align-items: center;">
+<div id="mediaModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 10000; align-items: center; justify-content: center; padding: 1rem; backdrop-filter: blur(3px);">
+    <div style="background: #ffffff; width: 95%; max-width: 820px; height: 85vh; border-radius: 12px; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.25);">
+        <div style="padding: 1rem 1.25rem; border-bottom: 1px solid var(--admin-border); display: flex; justify-content: space-between; align-items: center;">
             <h3 style="margin: 0; font-family: 'Poppins', sans-serif; font-size: 1.15rem; font-weight: 800; color: #1e293b;">Select Image from Media Library</h3>
             <button type="button" onclick="closeMediaModal()" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #64748b;">&times;</button>
         </div>
         
-        <div style="padding: 1rem 1.5rem; border-bottom: 1px solid var(--admin-border); display: flex; gap: 0.75rem;">
+        <div style="padding: 0.75rem 1.25rem; border-bottom: 1px solid var(--admin-border); display: flex; gap: 0.5rem;">
             <input type="text" id="mediaSearch" class="input-field" placeholder="Search media..." style="flex: 1;" onkeyup="if(event.key === 'Enter') loadMedia(1)">
             <button type="button" class="btn-action" onclick="loadMedia(1)">Search</button>
         </div>
 
-        <div id="mediaGrid" style="padding: 1.5rem; flex: 1; overflow-y: auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 1rem; align-content: start;">
+        <div id="mediaGrid" style="padding: 1rem; flex: 1; overflow-y: auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 0.75rem; align-content: start;">
             <p style="text-align: center; grid-column: 1 / -1; color: var(--admin-text-muted);">Loading media...</p>
         </div>
 
-        <div style="padding: 1rem 1.5rem; border-top: 1px solid var(--admin-border); display: flex; justify-content: space-between; align-items: center;" id="mediaPagination">
+        <div style="padding: 0.75rem 1.25rem; border-top: 1px solid var(--admin-border); display: flex; justify-content: space-between; align-items: center;" id="mediaPagination">
         </div>
     </div>
 </div>

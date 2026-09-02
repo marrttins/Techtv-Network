@@ -28,39 +28,39 @@
 {{-- ============================================================
      2. PROFILE HEADER SUMMARY BANNER
      ============================================================ --}}
-<div style="background: linear-gradient(135deg, #0B193C 0%, #1E293B 100%); border-radius: 12px; padding: 2rem; color: #ffffff; margin-bottom: 2.5rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem; box-shadow: 0 8px 25px rgba(11, 25, 60, 0.15);">
-    <div style="display: flex; align-items: center; gap: 1.25rem;">
-        <div style="width: 64px; height: 64px; border-radius: 50%; background: var(--accent, #e02020); color: #ffffff; display: flex; align-items: center; justify-content: center; font-size: 1.75rem; font-weight: 800; border: 3px solid rgba(255,255,255,0.2); box-shadow: 0 4px 12px rgba(0,0,0,0.3); flex-shrink: 0;">
+<div style="background: linear-gradient(135deg, #0B193C 0%, #1E293B 100%); border-radius: 12px; padding: 1.5rem; color: #ffffff; margin-bottom: 1.75rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; box-shadow: 0 8px 25px rgba(11, 25, 60, 0.15);">
+    <div style="display: flex; align-items: center; gap: 1rem;">
+        <div style="width: 56px; height: 56px; border-radius: 50%; background: var(--accent, #e02020); color: #ffffff; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 800; border: 3px solid rgba(255,255,255,0.2); box-shadow: 0 4px 12px rgba(0,0,0,0.3); flex-shrink: 0;">
             {{ strtoupper(substr($user->name, 0, 1)) }}
         </div>
         <div>
-            <h2 style="font-family: 'Poppins', sans-serif; font-size: 1.45rem; font-weight: 800; margin: 0 0 0.3rem 0; color: #ffffff;">
+            <h2 style="font-family: 'Poppins', sans-serif; font-size: 1.3rem; font-weight: 800; margin: 0 0 0.25rem 0; color: #ffffff;">
                 {{ $user->name }}
             </h2>
-            <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
-                <span style="font-size: 0.88rem; color: #cbd5e1;">{{ $user->email }}</span>
-                <span style="font-size: 0.75rem; background: rgba(255,255,255,0.15); color: #ffffff; padding: 0.2rem 0.6rem; border-radius: 9999px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">
+            <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+                <span style="font-size: 0.85rem; color: #cbd5e1; word-break: break-all;">{{ $user->email }}</span>
+                <span style="font-size: 0.72rem; background: rgba(255,255,255,0.15); color: #ffffff; padding: 0.15rem 0.55rem; border-radius: 9999px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">
                     {{ $user->role }}
                 </span>
             </div>
         </div>
     </div>
 
-    <div style="font-size: 0.82rem; color: #94a3b8; text-align: right;">
+    <div style="font-size: 0.8rem; color: #94a3b8;">
         <div>Account Created</div>
-        <strong style="color: #f1f5f9; font-size: 0.9rem;">{{ $user->created_at ? $user->created_at->format('F d, Y') : 'N/A' }}</strong>
+        <strong style="color: #f1f5f9; font-size: 0.88rem;">{{ $user->created_at ? $user->created_at->format('F d, Y') : 'N/A' }}</strong>
     </div>
 </div>
 
 {{-- ============================================================
      3. TWO-COLUMN EDIT FORMS
      ============================================================ --}}
-<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: flex-start;">
+<div class="admin-grid-2" style="align-items: flex-start;">
 
     {{-- LEFT CARD: PERSONAL INFORMATION --}}
-    <div style="background: #ffffff; border: 1px solid var(--admin-border); border-radius: 12px; padding: 2rem; box-shadow: 0 2px 10px rgba(0,0,0,0.03);">
-        <div style="border-left: 3px solid var(--accent); padding-left: 0.75rem; margin-bottom: 1.75rem;">
-            <h3 style="font-family: 'Poppins', sans-serif; font-size: 1.15rem; font-weight: 800; color: #1e293b; margin: 0;">
+    <div style="background: #ffffff; border: 1px solid var(--admin-border); border-radius: 12px; padding: 1.5rem; box-shadow: 0 2px 10px rgba(0,0,0,0.03);">
+        <div style="border-left: 3px solid var(--accent); padding-left: 0.75rem; margin-bottom: 1.5rem;">
+            <h3 style="font-family: 'Poppins', sans-serif; font-size: 1.1rem; font-weight: 800; color: #1e293b; margin: 0;">
                 Profile Information
             </h3>
             <p style="font-size: 0.82rem; color: var(--admin-text-muted); margin: 0.25rem 0 0 0;">

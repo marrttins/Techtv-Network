@@ -4,18 +4,44 @@
 
 @section('admin_content')
 
+<style>
+@media (max-width: 768px) {
+    #media-grid {
+        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)) !important;
+        gap: 0.65rem !important;
+    }
+    .media-card .media-overlay {
+        opacity: 0.9 !important;
+        background: rgba(11, 25, 60, 0.75) !important;
+        top: auto !important;
+        bottom: 0 !important;
+        height: 38px !important;
+        flex-direction: row !important;
+        gap: 0.35rem !important;
+        padding: 0 0.35rem !important;
+    }
+    .media-card .media-overlay button {
+        width: auto !important;
+        flex: 1 !important;
+        padding: 0.25rem 0.4rem !important;
+        font-size: 0.68rem !important;
+        border-radius: 4px !important;
+    }
+}
+</style>
+
 {{-- ================================================================
      TOP BAR
 ================================================================ --}}
-<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 1.5rem;">
+<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.75rem; margin-bottom: 1.5rem;">
 
     {{-- Filter Tabs + Search --}}
-    <form method="GET" action="{{ url('/admin/media') }}" style="display: flex; flex-wrap: wrap; align-items: center; gap: 0.65rem; flex: 1;">
+    <form method="GET" action="{{ url('/admin/media') }}" style="display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; flex: 1 1 100%;">
         {{-- Type Filter --}}
-        <div style="display: flex; gap: 0.35rem; border: 1px solid var(--border); border-radius: var(--radius-md); padding: 3px; background: var(--surface);">
+        <div style="display: flex; flex-wrap: wrap; gap: 0.25rem; border: 1px solid var(--border); border-radius: var(--radius-md); padding: 3px; background: var(--surface);">
             @foreach(['all' => 'All ('.$countAll.')', 'images' => '🖼 Images ('.$countImages.')', 'documents' => '📄 Docs ('.$countDocs.')'] as $val => $label)
                 <a href="{{ url('/admin/media') }}?type={{ $val }}{{ $search ? '&search='.urlencode($search) : '' }}"
-                   style="padding: 0.3rem 0.75rem; border-radius: 5px; font-size: 0.8rem; font-weight: 600; text-decoration: none;
+                   style="padding: 0.3rem 0.65rem; border-radius: 5px; font-size: 0.78rem; font-weight: 600; text-decoration: none;
                           background: {{ $type === $val ? 'var(--accent)' : 'transparent' }};
                           color: {{ $type === $val ? '#fff' : 'var(--text-muted)' }};">
                     {{ $label }}
@@ -24,20 +50,20 @@
         </div>
 
         {{-- Search --}}
-        <div style="display: flex; gap: 0.35rem; flex: 1; max-width: 280px;">
+        <div style="display: flex; gap: 0.35rem; flex: 1 1 180px; max-width: 100%;">
             <input type="hidden" name="type" value="{{ $type }}">
             <input type="text" name="search" value="{{ $search }}" placeholder="Search files..."
-                   class="input-field" style="padding: 0.4rem 0.8rem; font-size: 0.83rem;">
-            <button type="submit" class="btn-action" style="padding: 0.4rem 0.75rem;">🔍</button>
+                   class="input-field" style="padding: 0.38rem 0.75rem; font-size: 0.82rem; min-width: 120px;">
+            <button type="submit" class="btn-action" style="padding: 0.38rem 0.75rem; font-size: 0.82rem;">🔍</button>
             @if($search)
-                <a href="{{ url('/admin/media') }}?type={{ $type }}" class="btn-action" style="color: var(--accent); text-decoration: none; padding: 0.4rem 0.75rem;">✕</a>
+                <a href="{{ url('/admin/media') }}?type={{ $type }}" class="btn-action" style="color: var(--accent); text-decoration: none; padding: 0.38rem 0.75rem; font-size: 0.82rem;">✕</a>
             @endif
         </div>
     </form>
 
     {{-- Right: Upload --}}
-    <div style="display: flex; gap: 0.65rem; align-items: center;">
-        <label for="upload-input" class="btn-submit" style="padding: 0.6rem 1.2rem; cursor: pointer; font-size: 0.88rem;">
+    <div style="width: 100%; display: flex; justify-content: flex-end;">
+        <label for="upload-input" class="btn-submit" style="padding: 0.55rem 1.25rem; cursor: pointer; font-size: 0.85rem; width: auto;">
             + Upload Files
         </label>
     </div>
@@ -47,16 +73,16 @@
      DRAG & DROP UPLOAD ZONE
 ================================================================ --}}
 <div id="drop-zone"
-     style="border: 2px dashed var(--border); border-radius: var(--radius-lg); padding: 2.5rem;
+     style="border: 2px dashed var(--border); border-radius: var(--radius-lg); padding: 1.5rem;
             text-align: center; margin-bottom: 1.5rem; background: var(--surface);
             transition: all 0.2s ease; cursor: pointer; display: none;"
      ondragover="event.preventDefault(); this.style.borderColor='var(--accent)'; this.style.background='rgba(224,32,32,0.05)';"
      ondragleave="this.style.borderColor='var(--border)'; this.style.background='var(--surface)';"
      ondrop="handleDrop(event)"
      onclick="document.getElementById('upload-input').click()">
-    <div style="font-size: 2.5rem; margin-bottom: 0.75rem;">📂</div>
-    <p style="font-weight: 700; color: var(--text); margin-bottom: 0.25rem;">Drop files here or click to browse</p>
-    <p style="font-size: 0.8rem; color: var(--text-muted);">JPEG, PNG, GIF, BMP files will be auto-converted to WebP &bull; Max 50MB per file</p>
+    <div style="font-size: 2rem; margin-bottom: 0.5rem;">📂</div>
+    <p style="font-weight: 700; color: var(--text); margin-bottom: 0.25rem; font-size: 0.95rem;">Drop files here or click to browse</p>
+    <p style="font-size: 0.78rem; color: var(--text-muted); margin: 0;">JPEG, PNG, GIF, BMP files will be auto-converted to WebP &bull; Max 50MB per file</p>
 </div>
 
 {{-- Hidden file input --}}

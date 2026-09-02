@@ -119,7 +119,7 @@ ul {
 }
 
 .header-logo {
-    height: 80px;
+    height: 70px;
     width: auto;
     object-fit: contain;
 }
@@ -4294,7 +4294,7 @@ article .sidebar {
 
     .news-featured-img {
         border-radius: 10px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
     }
 
     .news-featured-title {
@@ -4762,7 +4762,7 @@ article .sidebar {
     }
 
     .header-logo {
-        height: 80px;
+        height: 70px;
     }
 
     .nav-container {
